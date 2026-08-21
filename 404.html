@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Zenrixa</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Return to the Zenrixa homepage.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { height: 100%; }
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,111,0,0.07) 0%, transparent 70%), #000;
+    }
+    .error-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 4rem 4rem;
+      pointer-events: none;
+    }
+    .error-404 {
+      font-size: clamp(8rem, 22vw, 18rem);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      color: rgba(255,255,255,0.04);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+    .error-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .error-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(239,68,68,0.8);
+    }
+    .error-heading {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #fff;
+    }
+    .error-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+      max-width: 360px;
+    }
+    .error-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .error-link-pill {
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .error-link-pill.primary { background: #fff; color: #000; }
+    .error-link-pill.primary:hover { background: #e8e8e8; }
+    .error-link-pill.ghost { border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+    .error-link-pill.ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .error-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      z-index: 20;
+    }
+    .error-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .error-logo-icon {
+      width: 26px;
+      height: 26px;
+      background: #fff;
+      border-radius: 3px;
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .error-logo-icon div { width: 10px; height: 10px; background: #000; }
+    .error-logo span { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  </style>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="404 — Zenrixa">
+  <meta property="og:description" content="The page you're looking for doesn't exist. Return to the Zenrixa homepage.">
+  <meta property="og:image"       content="images/pricing-headset.jpg">
+  <meta property="og:url"         content="https://zenrixa.com/404.html">
+  <meta property="og:site_name"   content="Zenrixa">
+</head>
+<body class="bg-black text-white" style="font-family:'DM Sans',Inter,sans-serif;">
+
+  <div class="error-page">
+    <nav class="error-nav">
+      <a href="index.html" class="error-logo">
+        <div class="error-logo-icon"><div></div></div>
+        <span>Zenrixa</span>
+      </a>
+    </nav>
+
+    <div class="error-404">404</div>
+
+    <div class="error-content page-content">
+      <div class="error-badge">Error 404</div>
+      <h1 class="error-heading">Lost in space</h1>
+      <p class="error-sub">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+      <div class="error-links">
+        <a href="index.html" class="error-link-pill primary">Back to Home</a>
+        <a href="work.html" class="error-link-pill ghost">View Our Work</a>
+        <a href="contact.html" class="error-link-pill ghost">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="site.js" defer></script>
+
+  <!-- GDPR Cookie Banner -->
+  <div id="cookie-banner" role="alertdialog" aria-label="Cookie consent">
+    <p class="cookie-text">
+      <strong>We use cookies.</strong> Zenrixa uses essential cookies to keep things working and analytics cookies to improve your experience. We comply with GDPR as a Malta-based company.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">Accept All</button>
+      <button class="cookie-btn-decline" id="cookie-decline">Essential Only</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── GDPR Cookie Banner ── */
+    (function () {
+      if (localStorage.getItem('zenrixa_cookie_consent')) return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      setTimeout(function () { banner.classList.add('is-visible'); }, 1800);
+      function dismiss(choice) {
+        localStorage.setItem('zenrixa_cookie_consent', choice);
+        banner.style.transform = 'translateX(-50%) translateY(120px)';
+        banner.style.opacity = '0';
+        setTimeout(function () { banner.remove(); }, 500);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookie-decline').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
+
+</body>
+</html>

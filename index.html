@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenrixa — The Future Is Closer Than You Think</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Zenrixa is a next-generation VR creative agency building immersive experiences, hyper-focused interfaces, and ultra-low-latency spatial computing products for the future.">
+  <meta name="keywords" content="VR, virtual reality, spatial computing, immersive design, creative agency, Zenrixa, metaverse">
+  <meta name="author" content="Zenrixa">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Zenrixa — The Future Is Closer Than You Think">
+  <meta property="og:description" content="Next-generation VR experiences and immersive interfaces built for the future of spatial computing.">
+  <meta property="og:image"       content="images/ezgif-frame-001.webp">
+  <meta property="og:url"         content="https://zenrixa.com">
+  <meta property="og:site_name"   content="Zenrixa">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Zenrixa — The Future Is Closer Than You Think">
+  <meta name="twitter:description" content="Next-generation VR experiences built for the future of spatial computing.">
+  <meta name="twitter:image"       content="images/ezgif-frame-001.webp">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white selection:bg-white selection:text-black">
+
+  <!-- Loading Overlay -->
+  <div id="loader">
+    <div class="loader-text" id="loader-text">Loading 0%</div>
+    <div class="loader-bar-bg">
+      <div class="loader-bar-fill" id="loader-fill"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 1st Scroll Animation (Man Turning in VR) + Zenrixa Hero Layout -->
+  <div id="section-1" class="scroll-track">
+    
+    <!-- Full-Bleed Pinned Canvas Background (100vw x 100vh edge-to-edge) -->
+    <div class="sticky-container">
+      <canvas id="canvas-1" class="w-full h-full" style="position:relative; z-index:1;"></canvas>
+
+      <!-- Orange glow blob, sits above the canvas, blended so it looks like ambient light -->
+      <div id="orange-blob">
+        <div id="orange-blob-inner"></div>
+      </div>
+
+      <!-- Edge gradient for subtle text readability -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30 pointer-events-none" style="z-index:3;"></div>
+    </div>
+
+    <!-- Foreground Transparent Zenrixa Layout -->
+    <div class="relative z-10 -mt-[100vh] w-full min-h-screen flex flex-col justify-between p-6 sm:p-10 md:p-14 pointer-events-auto">
+      
+      <!-- Top Navigation Header -->
+      <header class="w-full flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 rotate-45 bg-white text-black flex items-center justify-center font-bold rounded-sm shadow-md">
+            <div class="w-3 h-3 bg-black"></div>
+          </div>
+          <span class="text-xl font-bold tracking-tight text-white font-sans drop-shadow-md">
+            Zenrixa
+          </span>
+        </div>
+
+        <!-- Center Nav Items -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+          <a href="index.html" class="text-white font-semibold underline underline-offset-8 decoration-2">Home</a>
+          <a href="product.html" class="hover:text-white transition-colors">Product</a>
+          <a href="about.html" class="hover:text-white transition-colors">About</a>
+          <a href="work.html" class="hover:text-white transition-colors">Work</a>
+          <a href="work.html" class="hover:text-white transition-colors">Portfolio</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+        </nav>
+
+        <!-- Menu Button Pill -->
+        <button id="btn-open-menu" class="px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all duration-200 active:scale-95 shadow-xl">
+          MENU
+        </button>
+      </header>
+
+      <!-- Main Hero Content -->
+      <main class="w-full flex-1 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Side: Headline & CTAs -->
+        <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="text-zinc-300 font-medium text-xs tracking-[0.2em] uppercase flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-white inline-block"></span>
+              CREATIVE AGENCY
+            </span>
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-[-0.03em] text-white leading-[1.04] font-sans drop-shadow-2xl max-w-2xl">
+            The Future Is<br>Closer Than You Think
+          </h1>
+
+          <div class="flex items-center gap-3 pt-2">
+            <div class="flex items-center gap-1 text-amber-400">
+              <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase text-zinc-300 tracking-wider">
+              3000+ CUSTOMERS
+            </span>
+          </div>
+
+          <div class="flex items-center gap-4 pt-4">
+            <button id="btn-open-chat" class="group flex items-center gap-3 pl-6 pr-2 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 transition-all duration-200 active:scale-95 shadow-2xl">
+              <span>Chat With Us</span>
+              <div class="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </div>
+            </button>
+
+            <a href="work.html" id="btn-our-works" class="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white font-bold text-sm border border-zinc-800 hover:bg-zinc-900 transition-all active:scale-95 shadow-2xl">
+              <span>Our Works</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side: Top Glass Card & Bottom Partners -->
+        <div class="lg:col-span-5 flex flex-col items-end justify-between space-y-12">
+          
+          <!-- Top Card: Design to Explore -->
+          <div class="w-full max-w-md rounded-3xl bg-black/40 border border-white/10 p-6 backdrop-blur-md space-y-4 shadow-2xl">
+            <h3 class="text-2xl font-bold text-white tracking-tight">Design to explore.</h3>
+            <p class="text-xs text-zinc-300 leading-relaxed">
+              Immersive typographic interfaces built for hyper-focused engagement.
+            </p>
+            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-semibold tracking-widest text-zinc-400 uppercase">
+              <span>CORE FOCUS • 01</span>
+              <button class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Right: Our Partners List -->
+          <div class="w-full max-w-md space-y-3">
+            <div class="text-right">
+              <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">OUR PARTNERS</span>
+            </div>
+            <div class="grid grid-cols-3 gap-y-3 gap-x-6 text-xs font-medium text-zinc-300 text-right">
+              <span class="hover:text-white cursor-pointer">zantic</span>
+              <span class="hover:text-white cursor-pointer">BookStore</span>
+              <span class="hover:text-white cursor-pointer">Wager</span>
+              <span class="hover:text-white cursor-pointer">Crono</span>
+              <span class="hover:text-white cursor-pointer">Mercury</span>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Bottom Watermark Footer -->
+      <div class="w-full overflow-hidden select-none pointer-events-none pt-4 flex justify-end opacity-20">
+        <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Zenrixa</span>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div id="scroll-indicator" aria-hidden="true">
+        <div class="scroll-indicator-mouse">
+          <div class="scroll-indicator-wheel"></div>
+        </div>
+        <span class="scroll-indicator-label">SCROLL</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" aria-modal="true" role="dialog" aria-label="Navigation menu">
+    <!-- Backdrop -->
+    <div id="mobile-menu-backdrop"></div>
+    <!-- Panel -->
+    <nav id="mobile-menu-panel">
+      <!-- Close button -->
+      <button id="btn-close-menu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <!-- Logo -->
+      <div class="mobile-menu-logo">
+        <div class="mobile-menu-logo-icon">
+          <div></div>
+        </div>
+        <span>Zenrixa</span>
+      </div>
+      <!-- Links -->
+      <ul class="mobile-menu-links">
+        <li><a href="index.html"   class="mobile-nav-link">Home</a></li>
+        <li><a href="product.html" class="mobile-nav-link">Product</a></li>
+        <li><a href="about.html"   class="mobile-nav-link">About</a></li>
+        <li><a href="work.html"    class="mobile-nav-link">Work</a></li>
+        <li><a href="work.html"    class="mobile-nav-link">Portfolio</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <!-- Footer tag -->
+      <p class="mobile-menu-footer">© 2026 Zenrixa</p>
+    </nav>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TESTIMONIALS SECTION
+       ═══════════════════════════════════════════════════════ -->
+  <section id="section-testimonials" style="background:#000;padding:100px clamp(24px,6vw,80px);position:relative;overflow:hidden;">
+
+    <!-- Subtle glow -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,111,0,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+
+      <!-- Header -->
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:60px;">
+        <div>
+          <div class="page-eyebrow" style="margin-bottom:14px;"><span class="page-eyebrow-dot"></span>Client Stories</div>
+          <h2 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.04em;line-height:1.05;color:#fff;margin:0;">
+            Trusted by<br><em style="font-weight:300;font-style:italic;">builders worldwide</em>
+          </h2>
+        </div>
+        <!-- Dot navigation -->
+        <div id="testi-dots" style="display:flex;gap:8px;align-items:center;padding-bottom:4px;">
+          <button class="testi-dot testi-dot--active" data-index="0" aria-label="Testimonial 1"></button>
+          <button class="testi-dot" data-index="1" aria-label="Testimonial 2"></button>
+          <button class="testi-dot" data-index="2" aria-label="Testimonial 3"></button>
+        </div>
+      </div>
+
+      <!-- Cards track -->
+      <div id="testi-track" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;transition:opacity .35s ease;">
+
+        <!-- Card 1 -->
+        <div class="testi-card" data-card="0" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:20px;transition:border-color .25s,transform .25s;">
+          <div style="font-size:2rem;line-height:1;color:rgba(255,111,0,0.35);font-weight:900;">&ldquo;</div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.7);line-height:1.75;flex:1;margin:0;">
+            Zenrixa didn't just deliver an XR campaign — they redefined how our brand shows up in space. The latency was imperceptible and the visual fidelity left our entire board speechless.
+          </p>
+          <div style="display:flex;gap:4px;margin-bottom:4px;">
+            <span style="color:#ff8c2a;font-size:13px;">★★★★★</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,rgba(255,111,0,0.3),rgba(255,111,0,0.08));border:1px solid rgba(255,111,0,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">DM</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#fff;letter-spacing:-0.01em;">Daniel Marsh</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.05em;">CMO · Mercury Industries</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="testi-card" data-card="1" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:20px;transition:border-color .25s,transform .25s;">
+          <div style="font-size:2rem;line-height:1;color:rgba(255,111,0,0.35);font-weight:900;">&ldquo;</div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.7);line-height:1.75;flex:1;margin:0;">
+            We engaged Zenrixa for our flagship spatial UI project and the result was extraordinary. Their team understood our constraints and delivered a HUD that our pilots actually love using.
+          </p>
+          <div style="display:flex;gap:4px;margin-bottom:4px;">
+            <span style="color:#ff8c2a;font-size:13px;">★★★★★</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,rgba(56,189,248,0.3),rgba(56,189,248,0.08));border:1px solid rgba(56,189,248,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">SA</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#fff;letter-spacing:-0.01em;">Sophia Adeyemi</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.05em;">Head of Innovation · Crono Analytics</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="testi-card" data-card="2" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:20px;transition:border-color .25s,transform .25s;">
+          <div style="font-size:2rem;line-height:1;color:rgba(255,111,0,0.35);font-weight:900;">&ldquo;</div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.7);line-height:1.75;flex:1;margin:0;">
+            The Zenrixa Vision platform completely transformed how we present our brand in virtual environments. ROI was measurable within 60 days. I'd recommend them to any serious studio.
+          </p>
+          <div style="display:flex;gap:4px;margin-bottom:4px;">
+            <span style="color:#ff8c2a;font-size:13px;">★★★★★</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,rgba(168,85,247,0.3),rgba(168,85,247,0.08));border:1px solid rgba(168,85,247,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">MK</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#fff;letter-spacing:-0.01em;">Marcus Klein</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.05em;">Creative Director · Zantic Corp</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#testi-track -->
+    </div>
+  </section>
+
+  <!-- SECTION 2: Pricing -->
+  <section id="section-plain-black" class="pricing-section">
+
+    <!-- Subtle grid background -->
+    <div class="pricing-grid-bg" aria-hidden="true"></div>
+
+    <div class="pricing-inner">
+
+      <!-- Header -->
+      <div class="pricing-header">
+        <h2 class="pricing-heading">Sleek design, built for scales</h2>
+        <p class="pricing-sub">Explore our modular subscriptions. Choose standard or premium tiers, and leverage real-time render tools.</p>
+      </div>
+
+      <!-- Billing Toggle -->
+      <div class="billing-toggle-wrap">
+        <div class="billing-toggle-pill">
+          <button id="toggle-monthly" class="billing-btn billing-btn--active" type="button" aria-pressed="true">
+            Monthly billing
+          </button>
+          <button id="toggle-annual" class="billing-btn" type="button" aria-pressed="false">
+            Annual billing
+            <span class="billing-save-badge">Save 20%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="pricing-grid">
+
+        <!-- Basic Card -->
+        <div class="pricing-card" data-reveal>
+          <div class="pricing-card-img-wrap">
+            <img src="images/pricing-headset.jpg" alt="Basic VR Headset" class="pricing-card-img">
+            <div class="pricing-card-img-vignette" aria-hidden="true"></div>
+            <div class="pricing-card-hw-tag">
+              <span class="pricing-card-hw-dot"></span>
+              <span>Zenrixa Vision</span>
+            </div>
+          </div>
+          <div class="pricing-card-body">
+            <div class="pricing-card-title-row">
+              <span class="pricing-card-name">Basic</span>
+            </div>
+            <div class="pricing-card-price-row">
+              <span class="pricing-price" data-monthly="$100" data-annual="$80">$100</span>
+              <span class="pricing-period">/m</span>
+            </div>
+            <p class="pricing-desc">For creators taking their first steps with Zenrixa.</p>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">&#10003;</span>Up to 3 projects in the cloud</li>
+              <li><span class="pricing-check">&#10003;</span>Image export up to 1080p</li>
+              <li><span class="pricing-check">&#10003;</span>Basic editing tools</li>
+              <li><span class="pricing-check">&#10003;</span>Free templates and icons</li>
+              <li><span class="pricing-check">&#10003;</span>Access via web and mobile app</li>
+            </ul>
+          </div>
+          <div class="pricing-card-cta">
+            <a id="btn-choose-basic" href="contact.html?plan=basic" class="pricing-btn" style="text-align:center;text-decoration:none;display:block;">Choose Plan</a>
+          </div>
+        </div>
+
+        <!-- Standard Card -->
+        <div class="pricing-card" data-reveal>
+          <div class="pricing-card-img-wrap">
+            <img src="images/pricing-headset.jpg" alt="Standard VR Headset" class="pricing-card-img">
+            <div class="pricing-card-img-vignette" aria-hidden="true"></div>
+            <div class="pricing-card-hw-tag">
+              <span class="pricing-card-hw-dot"></span>
+              <span>Zenrixa Vision</span>
+            </div>
+          </div>
+          <div class="pricing-card-body">
+            <div class="pricing-card-title-row">
+              <span class="pricing-card-name">Standard</span>
+            </div>
+            <div class="pricing-card-price-row">
+              <span class="pricing-price" data-monthly="$150" data-annual="$120">$150</span>
+              <span class="pricing-period">/m</span>
+            </div>
+            <p class="pricing-desc">For freelancers and small teams who need more freedom and flexibility.</p>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">&#10003;</span>Up to 50 projects in the cloud</li>
+              <li><span class="pricing-check">&#10003;</span>Export up to 4K</li>
+              <li><span class="pricing-check">&#10003;</span>Advanced editing toolkit</li>
+              <li><span class="pricing-check">&#10003;</span>Team collaboration (up to 5 members)</li>
+              <li><span class="pricing-check">&#10003;</span>Access to premium template library</li>
+            </ul>
+          </div>
+          <div class="pricing-card-cta">
+            <a id="btn-choose-standard" href="contact.html?plan=standard" class="pricing-btn" style="text-align:center;text-decoration:none;display:block;">Choose Plan</a>
+          </div>
+        </div>
+
+        <!-- Pro Card (Popular) -->
+        <div class="pricing-card pricing-card--pro" data-reveal>
+          <div class="pricing-card-img-wrap">
+            <img src="images/pricing-headset.jpg" alt="Pro VR Headset" class="pricing-card-img">
+            <div class="pricing-card-img-vignette" aria-hidden="true"></div>
+            <div class="pricing-card-hw-tag">
+              <span class="pricing-card-hw-dot"></span>
+              <span>Zenrixa Vision</span>
+            </div>
+          </div>
+          <div class="pricing-card-body">
+            <div class="pricing-card-title-row">
+              <span class="pricing-card-name">Pro</span>
+              <span class="pricing-popular-badge">POPULAR CHOICE</span>
+            </div>
+            <div class="pricing-card-price-row">
+              <span class="pricing-price" data-monthly="$200" data-annual="$160">$200</span>
+              <span class="pricing-period">/m</span>
+            </div>
+            <p class="pricing-desc">For studios, agencies, and professional creators working with brands.</p>
+            <ul class="pricing-features">
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Unlimited projects</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Export up to 8K + animations</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>AI-powered content generation tools</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Unlimited team members</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Brand customization (logos, fonts, palettes)</li>
+            </ul>
+          </div>
+          <div class="pricing-card-cta">
+            <a id="btn-choose-pro" href="contact.html?plan=pro" class="pricing-btn pricing-btn--pro" style="text-align:center;text-decoration:none;display:block;">Choose Plan</a>
+          </div>
+        </div>
+
+      </div><!-- /.pricing-grid -->
+
+      <p class="pricing-footer-note">Transparent pricing with no hidden fees.</p>
+
+    </div><!-- /.pricing-inner -->
+  </section>
+
+
+  <!-- SECTION 3: Second Scroll Animation (200 frames) + Scroll-Driven Content Overlay -->
+  <div id="section-3" class="scroll-track">
+    <!-- Sticky canvas — plays frame-by-frame as user scrolls -->
+    <div class="sticky-container">
+      <canvas id="canvas-2"></canvas>
+
+      <!-- Dark gradient vignette: content readability over the canvas -->
+      <div class="s3-vignette" aria-hidden="true"></div>
+
+      <!-- ─── CHAPTER 1: Hero Headline ────────────────────────── -->
+      <div class="s3-panel" id="s3-panel-hero" aria-hidden="false">
+        <div class="s3-panel-inner s3-panel-inner--hero">
+          <!-- Eyebrow label -->
+          <span class="s3-eyebrow">// ZENRIXA SOLUTIONS</span>
+
+          <!-- Split headline: "We offer next level solutions" -->
+          <h2 class="s3-hero-heading">
+            We offer next<br>
+            level
+            <em class="s3-hero-italic">solutions</em>
+          </h2>
+
+          <!-- Narrative description (right column on desktop) -->
+          <p class="s3-hero-desc">
+            After working with us, your business will achieve new heights. We return with in-depth analysis, tailored spatial strategies, and problems solved. We transform your vision into immersive reality.
+          </p>
+        </div>
+      </div>
+
+      <!-- ─── CHAPTER 2: Metrics Row ──────────────────────────── -->
+      <div class="s3-panel" id="s3-panel-metrics" aria-hidden="true">
+        <div class="s3-panel-inner s3-panel-inner--metrics">
+          <p class="s3-metrics-statement">
+            AT ZENRIXA, HELPING BUSINESSES TACKLE CHALLENGES IS CRUCIAL. WORKING WITH US PROVIDES LONG-TERM GROWTH
+          </p>
+
+          <div class="s3-metrics-grid">
+            <!-- Metric 1 -->
+            <div class="s3-metric">
+              <div class="s3-metric-number">
+                <span class="s3-metric-sym">$</span><span data-count="43" data-suffix="k" data-duration="1600">43k</span>
+              </div>
+              <div class="s3-metric-label">AVERAGE REVENUE</div>
+              <p class="s3-metric-desc">Identifying bottlenecks and executing tailor-fit strategies for scalable business growth.</p>
+            </div>
+            <!-- Metric 2 -->
+            <div class="s3-metric">
+              <div class="s3-metric-number">
+                <span data-count="200" data-suffix="+" data-duration="1800">200+</span>
+              </div>
+              <div class="s3-metric-label">XR CAMPAIGNS</div>
+              <p class="s3-metric-desc">Delivering high-impact spatial campaigns across global markets with measurable performance.</p>
+            </div>
+            <!-- Metric 3 -->
+            <div class="s3-metric">
+              <div class="s3-metric-number">
+                <span data-count="380" data-suffix="+" data-duration="2000">380+</span>
+              </div>
+              <div class="s3-metric-label">SUCCESSFUL PROJECTS</div>
+              <p class="s3-metric-desc">Comprehensive execution from initial concept to long-term market dominance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── CHAPTER 3: Challenge Cards ──────────────────────── -->
+      <div class="s3-panel" id="s3-panel-cards" aria-hidden="true">
+        <div class="s3-panel-inner s3-panel-inner--cards">
+          <span class="s3-eyebrow">// AGENCY PARADIGM MATRIX</span>
+
+          <div class="s3-cards-grid">
+
+            <!-- Card 1 -->
+            <div class="s3-card">
+              <div class="s3-card-top">
+                <div class="s3-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+                </div>
+                <div class="s3-card-dot"><div></div></div>
+              </div>
+              <div class="s3-card-body">
+                <span class="s3-card-quote">&ldquo;</span>
+                <p>We have difficulties in attracting and converting potential customers.</p>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="s3-card">
+              <div class="s3-card-top">
+                <div class="s3-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="s3-card-dot"><div></div></div>
+              </div>
+              <div class="s3-card-body">
+                <span class="s3-card-quote">&ldquo;</span>
+                <p>Our sales and ROI could use a serious boost — I need campaigns that actually deliver results.</p>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="s3-card">
+              <div class="s3-card-top">
+                <div class="s3-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="6" height="6"/><rect x="9" y="3" width="6" height="6"/><rect x="16" y="3" width="6" height="6"/><rect x="2" y="11" width="6" height="6"/><rect x="9" y="11" width="6" height="6"/></svg>
+                </div>
+                <div class="s3-card-dot"><div></div></div>
+              </div>
+              <div class="s3-card-body">
+                <span class="s3-card-quote">&ldquo;</span>
+                <p>Our goal is to stand out among others — we need to regain influence on the market.</p>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="s3-card">
+              <div class="s3-card-top">
+                <div class="s3-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+                </div>
+                <div class="s3-card-dot"><div></div></div>
+              </div>
+              <div class="s3-card-body">
+                <span class="s3-card-quote">&ldquo;</span>
+                <p>Managing our content workflow and creating consistent output feels like an endless struggle.</p>
+              </div>
+            </div>
+
+            <!-- Card 5: Recommended (spans 2 cols) -->
+            <div class="s3-card s3-card--recommended">
+              <div class="s3-card-top">
+                <span class="s3-card-badge">RECOMMENDED METHOD</span>
+                <div class="s3-card-dot"><div></div></div>
+              </div>
+              <div class="s3-card-body">
+                <p>We create tailored XR strategies including immersive environment design, spatial UX research, and ongoing performance analytics, ensuring long-term visibility and business growth.</p>
+              </div>
+            </div>
+
+          </div><!-- /.s3-cards-grid -->
+        </div>
+      </div>
+
+    </div><!-- /.sticky-container -->
+  </div><!-- /#section-3 -->
+
+  <!-- SECTION 4: Video Background & Overlay -->
+  <section id="section-4" class="relative min-h-screen w-full flex items-center justify-center select-none overflow-hidden" style="font-family: 'DM Sans', sans-serif;">
+    <video
+      id="section-4-video"
+      src="https://res.cloudinary.com/rwxedkff/video/upload/v1786752151/Video_3.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
+
+    <!-- Main Graphic Text ("Out of time and space") -->
+    <div class="relative z-10 w-full max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between pointer-events-none gap-4">
+      <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap" style="font-weight: 500; letter-spacing: -0.04em;">
+        Out of time
+      </h2>
+      <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap" style="font-weight: 500; letter-spacing: -0.04em;">
+        and space
+      </h2>
+    </div>
+
+    <!-- Center Floating Subtitle -->
+    <div class="absolute inset-x-0 bottom-[22%] flex flex-col items-center justify-center text-center z-10 pointer-events-auto">
+      <p class="text-[13px] md:text-[15px] text-neutral-300 font-normal tracking-wide">
+        Zenrixa is redefining the future of spatial computing.
+      </p>
+      <a href="about.html" class="text-[13px] md:text-[15px] text-white font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-white/70 mt-2 hover:text-neutral-300 hover:decoration-white/40 transition-colors">
+        Learn more about our story
+      </a>
+    </div>
+
+    <!-- Bottom Left Button -->
+    <a href="about.html" class="absolute bottom-8 left-6 md:bottom-12 md:left-12 flex items-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all z-10 group">
+      <div class="w-4 h-4 rounded-full border border-[#f95d13] flex items-center justify-center">
+        <span class="text-[#f95d13] text-[9px] font-bold leading-none select-none">i</span>
+      </div>
+      <span class="text-neutral-300 group-hover:text-white transition-colors">Our Story</span>
+    </a>
+
+    <!-- Bottom Right Button -->
+    <a href="work.html" class="absolute bottom-8 right-6 md:bottom-12 md:right-12 flex items-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all z-10 group">
+      <span class="text-neutral-300 group-hover:text-white transition-colors">View Our Work</span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 transition-all">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Video Footer -->
+  <footer id="main-footer" class="w-full min-h-screen relative overflow-hidden bg-black z-10 border-t border-white/5 flex flex-col justify-between pt-20 pb-8 px-6 md:px-12 lg:px-20" style="font-family: 'DM Sans', sans-serif;">
+    <!-- Video Background -->
+    <video
+      id="footer-video"
+      src="https://res.cloudinary.com/rwxedkff/video/upload/v1786884590/Video_4.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-90"
+    ></video>
+    
+    <!-- Dark gradient overlays for text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+
+    <!-- Top Section: 3 Columns -->
+    <div class="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 mt-4">
+      
+      <!-- Left Column: Links -->
+      <div class="flex flex-col justify-between h-full space-y-12">
+        <nav class="flex flex-col space-y-4">
+          <a href="index.html" class="text-neutral-400 hover:text-white font-medium text-base transition-colors">Home</a>
+          <a href="about.html" class="text-white font-semibold text-lg hover:text-neutral-300 transition-colors tracking-wide">About us</a>
+          <a href="contact.html" class="text-white font-semibold text-lg hover:text-neutral-300 transition-colors tracking-wide">Partnership</a>
+        </nav>
+        <p class="text-neutral-500 text-[11px] leading-relaxed tracking-wide">
+          ©2026 Zenrixa.<br>All rights reserved
+        </p>
+      </div>
+
+      <!-- Center Column: Address & Social -->
+      <div class="flex flex-col items-center text-center space-y-6">
+        <div>
+          <h4 class="text-neutral-500 text-[11px] font-bold tracking-[0.15em] mb-2">ADDRESS:</h4>
+          <p class="text-neutral-300 text-[13px] max-w-[260px] leading-relaxed tracking-wide">
+            Zenrixa Limited 115B, suite 3, Old Mint<br>
+            Street, Valletta, VLT 1515, Malta
+          </p>
+        </div>
+        
+        <div class="flex gap-3 pt-2">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-xl bg-[#111111]/80 border border-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-[#222222] transition-colors backdrop-blur-sm">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <a href="https://linkedin.com/company/zenrixa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-9 h-9 rounded-xl bg-[#111111]/80 border border-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-[#222222] transition-colors backdrop-blur-sm">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+
+        <a href="contact.html" class="text-neutral-500 hover:text-white text-[11px] transition-colors pt-2 tracking-wide">Privacy Policy</a>
+      </div>
+
+      <!-- Right Column: Partner Badge -->
+      <div class="flex flex-col justify-between items-end h-full space-y-12 text-right">
+        <p class="text-neutral-500 text-[11px] tracking-wide">
+          Lead Google Partner in<br>2023
+        </p>
+
+        <!-- Mock Google Partner Badge -->
+        <div class="bg-[#111111]/90 border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center w-[140px] shadow-2xl backdrop-blur-md">
+          <svg class="w-[22px] h-[22px] mb-2" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          <span class="text-white text-[10px] font-semibold tracking-wide">Google Partner</span>
+          <span class="text-neutral-500 text-[8px] font-bold tracking-[0.2em] mt-1">PREMIER 2023</span>
+        </div>
+
+        <p class="text-neutral-500 text-[11px] tracking-wide">
+          Website by hx6n
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Bottom Section: Giant Typography -->
+    <div class="relative z-10 w-full flex items-center justify-center mt-24 md:mt-auto pt-10">
+      <h2 class="text-white tracking-tighter leading-none select-none flex items-baseline" style="font-size: clamp(4.5rem, 16vw, 18rem);">
+        <span class="font-bold">ZEN</span><span class="font-light">rixa</span>
+      </h2>
+    </div>
+  </footer>
+
+  <!-- Interactive Chat Modal -->
+  <div id="chat-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="w-full max-w-lg rounded-3xl bg-zinc-900 border border-zinc-800 p-6 shadow-2xl flex flex-col space-y-4">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">ZX</div>
+          <div>
+            <h3 class="font-bold text-white text-base">Zenrixa Support</h3>
+            <p class="text-xs text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online now</p>
+          </div>
+        </div>
+        <button id="btn-close-chat" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">✕</button>
+      </div>
+
+      <!-- Message Thread -->
+      <div id="chat-thread" class="flex flex-col gap-3 max-h-64 overflow-y-auto py-1 pr-1">
+        <!-- Initial bot message -->
+        <div class="chat-bubble chat-bubble--bot">
+          Hello! How can we help bring your product vision to life? 👋
+        </div>
+      </div>
+
+      <!-- Input Row -->
+      <div class="flex items-center gap-2 pt-2 border-t border-zinc-800">
+        <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off"
+          class="flex-1 bg-zinc-950 border border-zinc-800 rounded-full px-4 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors">
+        <button id="chat-send" class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold hover:bg-zinc-200 transition-colors" aria-label="Send message">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="main.js" defer></script>
+  <script src="site.js" defer></script>
+  <script>
+    /* ── Testimonials dot nav + auto-rotate ── */
+    (function () {
+      const dots  = document.querySelectorAll('.testi-dot');
+      const cards = document.querySelectorAll('.testi-card');
+      if (!dots.length || !cards.length) return;
+
+      let active = 0;
+      let timer;
+
+      function goTo(index) {
+        dots[active].classList.remove('testi-dot--active');
+        cards[active].classList.remove('is-active');
+        active = (index + cards.length) % cards.length;
+        dots[active].classList.add('testi-dot--active');
+        cards[active].classList.add('is-active');
+        /* On mobile, scroll the active card into view */
+        if (window.innerWidth <= 768) {
+          cards[active].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+
+      function startAuto() {
+        timer = setInterval(function () { goTo(active + 1); }, 5000);
+      }
+
+      function stopAuto() { clearInterval(timer); }
+
+      /* Initialise */
+      cards[0].classList.add('is-active');
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          stopAuto();
+          goTo(parseInt(dot.dataset.index));
+          startAuto();
+        });
+      });
+
+      /* Pause on hover */
+      var section = document.getElementById('section-testimonials');
+      if (section) {
+        section.addEventListener('mouseenter', stopAuto);
+        section.addEventListener('mouseleave', startAuto);
+      }
+
+      startAuto();
+    })();
+  </script>
+
+  <!-- GDPR Cookie Banner -->
+  <div id="cookie-banner" role="alertdialog" aria-label="Cookie consent">
+    <p class="cookie-text">
+      <strong>We use cookies.</strong> Zenrixa uses essential cookies to keep things working and analytics cookies to improve your experience. We comply with GDPR as a Malta-based company.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">Accept All</button>
+      <button class="cookie-btn-decline" id="cookie-decline">Essential Only</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── GDPR Cookie Banner ── */
+    (function () {
+      if (localStorage.getItem('zenrixa_cookie_consent')) return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      setTimeout(function () { banner.classList.add('is-visible'); }, 1800);
+      function dismiss(choice) {
+        localStorage.setItem('zenrixa_cookie_consent', choice);
+        banner.style.transform = 'translateX(-50%) translateY(120px)';
+        banner.style.opacity = '0';
+        setTimeout(function () { banner.remove(); }, 500);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookie-decline').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
+
+  <script>
+    /* ── Scroll Spy (index.html only) ── */
+    (function () {
+      var sections = [
+        { id: 'section-1',            label: 'Home' },
+        { id: 'section-plain-black',  label: 'Pricing' },
+        { id: 'section-testimonials', label: 'Stories' },
+        { id: 'section-3',            label: 'Results' },
+        { id: 'section-4',            label: 'Contact' },
+      ];
+      var navLinks = document.querySelectorAll('.nav-links a, .nav-link');
+      if (!navLinks.length) return;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = entry.target.id;
+          navLinks.forEach(function (a) { a.classList.remove('nav-link--spy-active'); });
+          navLinks.forEach(function (a) {
+            var href = a.getAttribute('href') || '';
+            if (href === '#' + id || (id === 'section-1' && href === '#')) {
+              a.classList.add('nav-link--spy-active');
+            }
+          });
+        });
+      }, { threshold: 0.35 });
+      sections.forEach(function (s) {
+        var el = document.getElementById(s.id);
+        if (el) obs.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>

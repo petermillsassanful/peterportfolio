@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Zenrixa | Get in Touch</title>
+  <meta name="description" content="Start your next immersive project with Zenrixa. Reach out to discuss VR experiences, spatial UI, XR campaigns, and more.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['"DM Sans"','Inter','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-split { display:grid; grid-template-columns:5fr 7fr; gap:80px; align-items:start; }
+    @media(max-width:900px){ .contact-split { grid-template-columns:1fr; gap:48px; } }
+    .contact-info-item { display:flex; gap:16px; align-items:flex-start; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+    .contact-info-item:last-child { border-bottom:none; }
+    .contact-info-icon { width:40px; height:40px; border-radius:10px; background:rgba(255,111,0,0.08); border:1px solid rgba(255,111,0,0.15); display:flex; align-items:center; justify-content:center; color:#ff8c2a; flex-shrink:0; }
+    .contact-info-label { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px; }
+    .contact-info-value { font-size:14px; color:rgba(255,255,255,0.75); line-height:1.6; }
+    .contact-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 14px 6px 8px; border-radius:9999px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); font-size:12px; font-weight:600; color:rgba(52,211,153,0.9); margin-bottom:32px; }
+    .contact-badge-dot { width:8px; height:8px; border-radius:50%; background:#34d399; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .contact-form { background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:40px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media(max-width:600px){ .form-row { grid-template-columns:1fr; } }
+    .form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+    .form-label { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+    .form-input, .form-textarea, .form-select { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:13px 16px; font-size:14px; color:#fff; font-family:'DM Sans',Inter,sans-serif; outline:none; transition:border-color .2s,background .2s; }
+    .form-input::placeholder, .form-textarea::placeholder { color:rgba(255,255,255,0.2); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color:rgba(255,111,0,0.5); background:rgba(255,255,255,0.06); }
+    .form-select { appearance:none; cursor:pointer; }
+    .form-select option { background:#111; color:#fff; }
+    .form-textarea { resize:vertical; min-height:120px; }
+    .form-submit { width:100%; padding:15px 24px; border-radius:9999px; background:#fff; color:#000; font-size:15px; font-weight:700; letter-spacing:-0.01em; border:none; cursor:pointer; transition:background .2s,transform .15s,box-shadow .2s; box-shadow:0 4px 20px rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; gap:10px; }
+    .form-submit:hover { background:#e8e8e8; box-shadow:0 6px 28px rgba(255,255,255,0.2); }
+    .form-submit:active { transform:scale(0.98); }
+    .form-note { text-align:center; font-size:12px; color:rgba(255,255,255,0.25); margin-top:16px; }
+    .social-links { display:flex; gap:10px; margin-top:16px; }
+    .social-link { width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.4); text-decoration:none; transition:all .2s; }
+    .social-link:hover { background:rgba(255,255,255,0.08); color:#fff; border-color:rgba(255,255,255,0.2); }
+    .form-success { display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:40px; text-align:center; }
+    .form-success.visible { display:flex; }
+    .success-icon { width:60px; height:60px; border-radius:50%; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.25); display:flex; align-items:center; justify-content:center; color:#34d399; font-size:24px; }
+
+    /* ── Plan pre-fill banner ── */
+    .plan-banner {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(255, 111, 0, 0.07);
+      border: 1px solid rgba(255, 111, 0, 0.22);
+      margin-bottom: 24px;
+      animation: planBannerIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .plan-banner.visible { display: flex; }
+    @keyframes planBannerIn {
+      from { opacity:0; transform:translateY(-8px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .plan-banner-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,111,0,0.12); border: 1px solid rgba(255,111,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: #ff8c2a; flex-shrink: 0;
+    }
+    .plan-banner-text { flex: 1; }
+    .plan-banner-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,111,0,0.7); margin-bottom: 2px; }
+    .plan-banner-name  { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+    .plan-banner-price { font-size: 12px; color: rgba(255,255,255,0.4); margin-left: auto; white-space: nowrap; }
+  </style>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Contact — Zenrixa">
+  <meta property="og:description" content="Start your next immersive project with Zenrixa. We respond to every inquiry within 24 hours.">
+  <meta property="og:image"       content="images/pricing-headset.jpg">
+  <meta property="og:url"         content="https://zenrixa.com/contact.html">
+  <meta property="og:site_name"   content="Zenrixa">
+</head>
+<body class="bg-black text-white" style="font-family:'DM Sans',Inter,sans-serif;">
+
+  <nav class="inner-nav">
+    <a href="index.html" class="inner-nav-logo"><div class="inner-nav-logo-icon"><div></div></div><span>Zenrixa</span></a>
+    <ul class="inner-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="inner-nav-cta">Get in Touch</a>
+  </nav>
+
+  <div class="page-content">
+
+    <div class="page-hero">
+      <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Get in Touch</div>
+      <h1 class="page-hero-heading">Let's build<br><em style="font-style:italic;font-weight:300;">together</em></h1>
+      <p class="page-hero-sub">Tell us about your project. We respond to every inquiry within 24 hours, no exceptions.</p>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="page-section">
+      <div class="contact-split">
+
+        <!-- Left: Info -->
+        <div class="reveal">
+          <div class="contact-badge"><span class="contact-badge-dot"></span>Available for new projects</div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <div class="contact-info-label">Address</div>
+              <div class="contact-info-value">Zenrixa Limited 115B, Suite 3<br>Old Mint Street, Valletta, VLT 1515<br>Malta</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">hello@zenrixa.com<br>studio@zenrixa.com</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <div class="contact-info-label">Response Time</div>
+              <div class="contact-info-value">Within 24 hours<br><span style="font-size:12px;color:rgba(52,211,153,0.8);">Usually within a few hours</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:8px;">
+            <div class="contact-info-label" style="margin-bottom:12px;">Follow Us</div>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="LinkedIn">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="social-link" aria-label="X / Twitter">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form reveal reveal-delay-1">
+          <div id="form-wrap">
+            <!-- Plan Banner: shown when arriving from a pricing card -->
+            <div class="plan-banner" id="plan-banner">
+              <div class="plan-banner-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div class="plan-banner-text">
+                <div class="plan-banner-label">Selected Plan</div>
+                <div class="plan-banner-name" id="plan-banner-name">Zenrixa Vision</div>
+              </div>
+              <div class="plan-banner-price" id="plan-banner-price"></div>
+            </div>
+            <h2 style="font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;color:#fff;margin-bottom:28px;">Send us a message</h2>
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="field-name">Your Name</label>
+                  <input id="field-name" class="form-input" type="text" placeholder="Alex Johnson" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="field-email">Email Address</label>
+                  <input id="field-email" class="form-input" type="email" placeholder="alex@company.com" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="field-company">Company</label>
+                  <input id="field-company" class="form-input" type="text" placeholder="Your Company">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="field-budget">Project Budget</label>
+                  <select id="field-budget" class="form-select">
+                    <option value="" disabled selected>Select range</option>
+                    <option>Under $10k</option>
+                    <option>$10k – $50k</option>
+                    <option>$50k – $150k</option>
+                    <option>$150k+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="field-service">Service Interested In</label>
+                <select id="field-service" class="form-select">
+                  <option value="" disabled selected>Select a service</option>
+                  <option>VR Experience Design</option>
+                  <option>Spatial UI / HUD</option>
+                  <option>XR Campaign Strategy</option>
+                  <option>Brand Identity for XR</option>
+                  <option>Zenrixa Vision Platform</option>
+                  <option>Other / Not Sure</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="field-message">Tell Us About Your Project</label>
+                <textarea id="field-message" class="form-textarea" placeholder="Describe what you're building, your goals, and any relevant context..."></textarea>
+              </div>
+              <button type="submit" class="form-submit" id="submit-btn">
+                <span>Send Message</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <p class="form-note">No spam. No hidden fees. Just a real conversation.</p>
+            </form>
+          </div>
+
+          <div class="form-success" id="form-success">
+            <div class="success-icon">✓</div>
+            <h3 style="font-size:1.3rem;font-weight:700;letter-spacing:-0.02em;color:#fff;">Message Sent!</h3>
+            <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:280px;">Thanks for reaching out. We'll get back to you within 24 hours.</p>
+            <a href="work.html" class="btn-outline" style="margin-top:8px;">View Our Work</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="inner-footer">
+      <div class="inner-footer-top">
+        <a href="index.html" class="inner-footer-brand">
+          <div class="inner-nav-logo-icon" style="width:22px;height:22px;"><div style="width:8px;height:8px;"></div></div>
+          <span>Zenrixa</span>
+        </a>
+        <div class="inner-footer-links">
+          <a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="product.html">Product</a><a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="inner-footer-bottom">
+        <p>©2026 ZENRIXA LIMITED. ALL RIGHTS RESERVED.</p>
+        <p>VALLETTA, MALTA</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => obs.observe(el));
+
+    /* ── Plan pre-fill from URL ── */
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const plan   = (params.get('plan') || '').toLowerCase();
+      if (!plan) return;
+
+      const plans = {
+        basic:    { name: 'Basic Plan — Zenrixa Vision',    price: '$100/mo', budget: '$10k – $50k',   service: 'Zenrixa Vision Platform', msg: "I'd like to get started with the Basic plan ($100/mo). Please let me know the next steps." },
+        standard: { name: 'Standard Plan — Zenrixa Vision', price: '$150/mo', budget: '$50k – $150k',  service: 'Zenrixa Vision Platform', msg: "I'm interested in the Standard plan ($150/mo) and would love to discuss how it fits our team." },
+        pro:      { name: 'Pro Plan — Zenrixa Vision',      price: '$200/mo', budget: '$150k+',         service: 'Zenrixa Vision Platform', msg: "I'd like to explore the Pro plan ($200/mo) for our studio. Can we schedule a call?" },
+      };
+
+      const info = plans[plan];
+      if (!info) return;
+
+      /* Show banner */
+      const banner = document.getElementById('plan-banner');
+      document.getElementById('plan-banner-name').textContent  = info.name;
+      document.getElementById('plan-banner-price').textContent = info.price;
+      banner.classList.add('visible');
+
+      /* Pre-select Service dropdown */
+      const svc = document.getElementById('field-service');
+      Array.from(svc.options).forEach(opt => {
+        if (opt.text === info.service) opt.selected = true;
+      });
+
+      /* Pre-select Budget dropdown */
+      const bud = document.getElementById('field-budget');
+      Array.from(bud.options).forEach(opt => {
+        if (opt.text === info.budget) opt.selected = true;
+      });
+
+      /* Pre-fill message */
+      document.getElementById('field-message').value = info.msg;
+
+      /* Scroll the form into view smoothly */
+      setTimeout(() => {
+        document.getElementById('form-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 400);
+    })();
+
+    /* ── Form submit ── */
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (validateForm()) submitForm();
+    });
+
+    /* ── Validation helpers ── */
+    function showError(field, msg) {
+      field.classList.add('is-error');
+      field.classList.remove('is-valid');
+      // Remove existing error if present
+      const existing = field.parentNode.querySelector('.form-error-msg');
+      if (existing) existing.remove();
+      const err = document.createElement('p');
+      err.className = 'form-error-msg';
+      err.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> ${msg}`;
+      field.parentNode.insertBefore(err, field.nextSibling);
+    }
+
+    function clearError(field) {
+      field.classList.remove('is-error');
+      field.classList.add('is-valid');
+      const existing = field.parentNode.querySelector('.form-error-msg');
+      if (existing) existing.remove();
+    }
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    function validateForm() {
+      let valid = true;
+      const name    = document.getElementById('field-name');
+      const email   = document.getElementById('field-email');
+      const service = document.getElementById('field-service');
+      const message = document.getElementById('field-message');
+
+      if (!name.value.trim()) {
+        showError(name, 'Please enter your name'); valid = false;
+      } else clearError(name);
+
+      if (!email.value.trim()) {
+        showError(email, 'Please enter your email address'); valid = false;
+      } else if (!isValidEmail(email.value.trim())) {
+        showError(email, 'Please enter a valid email address'); valid = false;
+      } else clearError(email);
+
+      if (!service.value || service.value === '') {
+        showError(service, 'Please select a service'); valid = false;
+      } else clearError(service);
+
+      if (!message.value.trim() || message.value.trim().length < 10) {
+        showError(message, 'Please tell us a bit more about your project'); valid = false;
+      } else clearError(message);
+
+      // Scroll to first error
+      if (!valid) {
+        const firstError = document.querySelector('.is-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return valid;
+    }
+
+    function submitForm() {
+      const btn = document.getElementById('submit-btn');
+      const span = btn.querySelector('span');
+      span.textContent = 'Sending…';
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+      setTimeout(() => {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('form-success').classList.add('visible');
+      }, 1200);
+    }
+
+    /* Live validation — clear errors as user types / changes */
+    ['field-name','field-email','field-service','field-message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', () => {
+        if (el.classList.contains('is-error')) {
+          el.classList.remove('is-error');
+          const existing = el.parentNode.querySelector('.form-error-msg');
+          if (existing) existing.remove();
+        }
+      });
+    });
+  </script>
+  <script src="nav.js" defer></script>
+  <script src="site.js" defer></script>
+
+  <!-- GDPR Cookie Banner -->
+  <div id="cookie-banner" role="alertdialog" aria-label="Cookie consent">
+    <p class="cookie-text">
+      <strong>We use cookies.</strong> Zenrixa uses essential cookies to keep things working and analytics cookies to improve your experience. We comply with GDPR as a Malta-based company.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">Accept All</button>
+      <button class="cookie-btn-decline" id="cookie-decline">Essential Only</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── GDPR Cookie Banner ── */
+    (function () {
+      if (localStorage.getItem('zenrixa_cookie_consent')) return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      setTimeout(function () { banner.classList.add('is-visible'); }, 1800);
+      function dismiss(choice) {
+        localStorage.setItem('zenrixa_cookie_consent', choice);
+        banner.style.transform = 'translateX(-50%) translateY(120px)';
+        banner.style.opacity = '0';
+        setTimeout(function () { banner.remove(); }, 500);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookie-decline').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
+
+</body>
+</html>

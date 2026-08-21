@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Downloads/vrnew"
+		},
+		{
+			"path": "../../Downloads/ezgif-3eb1e533a8ad1ba3-jpg"
+		},
+		{
+			"path": "../../Downloads/zenrixa-hero/src"
+		},
+		{
+			"path": "../../../Downloads/forma-ai-pricing/src"
+		},
+		{
+			"path": "../../../Downloads/next-level-solutions/src"
+		},
+		{
+			"path": "../../../Downloads/out-of-time-and-space/src"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "newvrwebsite"
+	}
+}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Work — Zenrixa | VR Creative Portfolio</title>
+  <meta name="description" content="Explore Zenrixa's portfolio of immersive VR experiences, spatial UX campaigns, and brand identity projects delivered for global clients.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['"DM Sans"','Inter','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-bar { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:48px; }
+    .filter-btn { padding:8px 20px; border-radius:9999px; font-size:12px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; border:1px solid rgba(255,255,255,0.12); background:transparent; color:rgba(255,255,255,0.5); cursor:pointer; transition:all .2s; }
+    .filter-btn:hover { color:#fff; border-color:rgba(255,255,255,0.35); }
+    .filter-btn.active { background:#fff; color:#000; border-color:#fff; }
+    .work-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    @media(max-width:900px){ .work-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:580px){ .work-grid { grid-template-columns:1fr; } }
+    .work-card { position:relative; border-radius:20px; overflow:hidden; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); cursor:pointer; transition:border-color .25s,transform .25s; aspect-ratio:4/3; }
+    .work-card.featured { grid-column:span 2; aspect-ratio:16/9; }
+    @media(max-width:900px){ .work-card.featured { grid-column:span 2; } }
+    @media(max-width:580px){ .work-card.featured { grid-column:span 1; aspect-ratio:4/3; } }
+    .work-card:hover { border-color:rgba(255,255,255,0.22); transform:translateY(-4px); }
+    .work-card-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+    .work-card:hover .work-card-bg { transform:scale(1.06); }
+    .work-card-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+    .work-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 50%,transparent 100%); transition:background .3s; }
+    .work-card:hover .work-card-overlay { background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.35) 60%,rgba(0,0,0,0.1) 100%); }
+    .work-card-body { position:absolute; bottom:0; left:0; right:0; padding:24px; }
+    .work-card-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,111,0,0.9); background:rgba(255,111,0,0.12); border:1px solid rgba(255,111,0,0.2); padding:3px 10px; border-radius:9999px; margin-bottom:8px; }
+    .work-card-title { font-size:clamp(1rem,2vw,1.3rem); font-weight:700; letter-spacing:-0.02em; color:#fff; margin-bottom:4px; line-height:1.2; }
+    .work-card-client { font-size:12px; color:rgba(255,255,255,0.45); }
+    .work-card-arrow { position:absolute; top:16px; right:16px; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; color:#fff; opacity:0; transform:translateY(-4px); transition:opacity .25s,transform .25s; backdrop-filter:blur(6px); }
+    .work-card:hover .work-card-arrow { opacity:1; transform:translateY(0); }
+    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.07); border-radius:20px; overflow:hidden; margin-bottom:80px; }
+    @media(max-width:680px){ .stats-row { grid-template-columns:1fr 1fr; } }
+    .stats-row-cell { background:#050505; padding:28px 24px; }
+    .stats-row-num { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-0.04em; color:#fff; font-style:italic; line-height:1; margin-bottom:4px; }
+    .stats-row-label { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
+  </style>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Our Work — Zenrixa">
+  <meta property="og:description" content="Explore 380+ immersive VR experiences, spatial UI campaigns, and brand identity projects delivered worldwide.">
+  <meta property="og:image"       content="images/pricing-headset.jpg">
+  <meta property="og:url"         content="https://zenrixa.com/work.html">
+  <meta property="og:site_name"   content="Zenrixa">
+</head>
+<body class="bg-black text-white" style="font-family:'DM Sans',Inter,sans-serif;">
+
+  <nav class="inner-nav">
+    <a href="index.html" class="inner-nav-logo"><div class="inner-nav-logo-icon"><div></div></div><span>Zenrixa</span></a>
+    <ul class="inner-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="inner-nav-cta">Start a Project</a>
+  </nav>
+
+  <div class="page-content">
+
+    <div class="page-hero">
+      <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Portfolio</div>
+      <h1 class="page-hero-heading">Our<br><em style="font-style:italic;font-weight:300;">Work</em></h1>
+      <p class="page-hero-sub">380+ immersive experiences delivered across VR, spatial UI, XR campaigns, and brand identity for clients worldwide.</p>
+    </div>
+
+    <div class="page-section" style="padding-top:0;">
+
+      <!-- Stats Row -->
+      <div class="stats-row reveal">
+        <div class="stats-row-cell"><div class="stats-row-num"><span data-count="380" data-suffix="+" data-duration="1800">380+</span></div><div class="stats-row-label">Projects</div></div>
+        <div class="stats-row-cell"><div class="stats-row-num"><span data-count="200" data-suffix="+" data-duration="1600">200+</span></div><div class="stats-row-label">XR Campaigns</div></div>
+        <div class="stats-row-cell"><div class="stats-row-num"><span data-count="40" data-suffix="+" data-duration="1200">40+</span></div><div class="stats-row-label">Countries</div></div>
+        <div class="stats-row-cell"><div class="stats-row-num"><span data-count="3000" data-suffix="k+" data-scale="1000" data-duration="2000">3k+</span></div><div class="stats-row-label">Happy Clients</div></div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="vr">VR Experience</button>
+        <button class="filter-btn" data-filter="spatial">Spatial UI</button>
+        <button class="filter-btn" data-filter="brand">Brand Identity</button>
+        <button class="filter-btn" data-filter="xr">XR Campaign</button>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="work-grid" id="work-grid">
+
+        <!-- Project 1 - Featured -->
+        <div class="work-card featured reveal" data-category="vr">
+          <img class="work-card-bg" src="images/pricing-headset.jpg" alt="Zenrixa Vision Launch" onerror="this.style.display='none'">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(255,111,0,0.15),rgba(0,0,0,0.8));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">VR Experience</div>
+            <div class="work-card-title">Zenrixa Vision — Platform Launch</div>
+            <div class="work-card-client">Zenrixa × Mercury</div>
+          </div>
+          <div class="work-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="work-card reveal reveal-delay-1" data-category="spatial">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(56,189,248,0.12),rgba(0,0,0,0.7));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">Spatial UI</div>
+            <div class="work-card-title">Crono Dashboard Interface</div>
+            <div class="work-card-client">Crono Analytics</div>
+          </div>
+          <div class="work-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="work-card reveal reveal-delay-2" data-category="brand">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(0,0,0,0.7));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">Brand Identity</div>
+            <div class="work-card-title">Zantic Brand Spatial Identity</div>
+            <div class="work-card-client">Zantic Corp</div>
+          </div>
+          <div class="work-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="work-card reveal reveal-delay-1" data-category="xr">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(52,211,153,0.12),rgba(0,0,0,0.7));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">XR Campaign</div>
+            <div class="work-card-title">Wager Sports Arena XR</div>
+            <div class="work-card-client">Wager × BookStore</div>
+          </div>
+          <div class="work-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="work-card reveal reveal-delay-2" data-category="vr">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(251,191,36,0.12),rgba(0,0,0,0.7));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">VR Experience</div>
+            <div class="work-card-title">BookStore Virtual Showroom</div>
+            <div class="work-card-client">BookStore Global</div>
+          </div>
+          <div class="work-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="work-card reveal reveal-delay-3" data-category="spatial">
+          <div class="work-card-placeholder" style="background:linear-gradient(135deg,rgba(239,68,68,0.12),rgba(0,0,0,0.7));"></div>
+          <div class="work-card-overlay"></div>
+          <div class="work-card-body">
+            <div class="work-card-tag">Spatial UI</div>
+            <div class="work-card-title">Mercury Mission Control HUD</div>
+            <div class="work-card-client">Mercury Industries</div>
+          </div>
+          <div class="work-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <h2 class="reveal">Have a project in mind?</h2>
+      <p class="reveal reveal-delay-1">We'd love to hear about what you're building. Let's create something unforgettable together.</p>
+      <div class="cta-strip-btns reveal reveal-delay-2">
+        <a href="contact.html" class="btn-primary">Start a Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+        <a href="about.html" class="btn-outline">Meet the Team</a>
+      </div>
+    </div>
+
+    <footer class="inner-footer">
+      <div class="inner-footer-top">
+        <a href="index.html" class="inner-footer-brand">
+          <div class="inner-nav-logo-icon" style="width:22px;height:22px;"><div style="width:8px;height:8px;"></div></div>
+          <span>Zenrixa</span>
+        </a>
+        <div class="inner-footer-links">
+          <a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="product.html">Product</a><a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="inner-footer-bottom">
+        <p>©2026 ZENRIXA LIMITED. ALL RIGHTS RESERVED.</p>
+        <p>VALLETTA, MALTA</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.work-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    /* ── Counting Animation ── */
+    (function(){
+      function easeOutExpo(t){ return t===1?1:1-Math.pow(2,-10*t); }
+      function fmt(v,scale,suffix){
+        if(scale){
+          /* scale: e.g. scale=1000, suffix="k+" → show "3k+" */
+          var scaled=Math.round(v/scale);
+          return scaled+suffix;
+        }
+        return (v>=1000?Math.round(v).toLocaleString():Math.round(v))+suffix;
+      }
+      function animateCount(el,target,prefix,suffix,duration,scale){
+        var start=performance.now();
+        function step(now){
+          var p=Math.min((now-start)/duration,1),v=easeOutExpo(p)*target;
+          el.textContent=prefix+fmt(v,scale,suffix);
+          if(p<1){requestAnimationFrame(step);}
+          else{el.textContent=prefix+fmt(target,scale,suffix);}
+        }
+        requestAnimationFrame(step);
+      }
+      var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting)return;
+          obs.unobserve(e.target);
+          var el=e.target,
+              count=parseFloat((el.dataset.count||'').replace(/[^\d.]/g,'')),
+              prefix=el.dataset.prefix||'',
+              suffix=el.dataset.suffix||'',
+              scale=el.dataset.scale?parseInt(el.dataset.scale,10):0,
+              dur=parseInt(el.dataset.duration||'1800',10);
+          if(!isNaN(count))animateCount(el,count,prefix,suffix,dur,scale);
+        });
+      },{threshold:0.3});
+      document.querySelectorAll('[data-count]').forEach(function(el){obs.observe(el);});
+    })();
+  </script>
+  <script src="nav.js" defer></script>
+  <script src="site.js" defer></script>
+
+  <!-- ── Project Modal Drawer ── -->
+  <div id="project-modal-overlay" role="dialog" aria-modal="true" aria-label="Project details">
+    <div id="project-modal-drawer">
+      <!-- Sticky header -->
+      <div class="modal-header">
+        <div>
+          <div id="modal-tag" class="modal-tag">VR Experience</div>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Hero gradient image -->
+        <div class="modal-hero-img" id="modal-hero"></div>
+        <!-- Meta -->
+        <h2 class="modal-title" id="modal-title">Project Title</h2>
+        <p class="modal-client" id="modal-client">Client Name</p>
+        <p class="modal-desc" id="modal-desc">Project description goes here.</p>
+        <!-- Stats -->
+        <div class="modal-stats-grid" id="modal-stats"></div>
+        <!-- CTA -->
+        <a href="contact.html?plan=pro" class="modal-cta" id="modal-cta">
+          Start a Similar Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── Project Modal Data ── */
+    var projectData = {
+      'Zenrixa Vision — Platform Launch': {
+        tag: 'VR Experience', client: 'Zenrixa × Mercury',
+        color: 'linear-gradient(135deg,rgba(255,111,0,0.25) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'A full end-to-end spatial computing platform launch. We designed and built the VR interface, spatial UX flows, and the real-time content delivery pipeline that powers the Zenrixa Vision headset.',
+        stats: [
+          { label: 'Timeline', value: '6 months' },
+          { label: 'Team Size', value: '12 members' },
+          { label: 'Result', value: '+340% retention' },
+          { label: 'Platform', value: 'Zenrixa Vision OS' }
+        ]
+      },
+      'Crono Dashboard Interface': {
+        tag: 'Spatial UI', client: 'Crono Analytics',
+        color: 'linear-gradient(135deg,rgba(56,189,248,0.2) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'A zero-latency spatial data dashboard built for high-frequency trading environments. Custom HUD panels, gesture controls, and a real-time 3D data visualisation engine.',
+        stats: [
+          { label: 'Timeline', value: '3 months' },
+          { label: 'Latency', value: '<7ms render' },
+          { label: 'Result', value: '+62% efficiency' },
+          { label: 'Platform', value: 'WebXR / Three.js' }
+        ]
+      },
+      'Zantic Brand Spatial Identity': {
+        tag: 'Brand Identity', client: 'Zantic Corp',
+        color: 'linear-gradient(135deg,rgba(168,85,247,0.2) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'Complete spatial brand identity system: 3D logo animations, immersive brand environments, XR-ready assets, and a motion design language built for the next decade of brand touchpoints.',
+        stats: [
+          { label: 'Timeline', value: '10 weeks' },
+          { label: 'Deliverables', value: '200+ assets' },
+          { label: 'Result', value: '98% brand recall' },
+          { label: 'Formats', value: 'WebGL / USDZ / glTF' }
+        ]
+      },
+      'Wager Sports Arena XR': {
+        tag: 'XR Campaign', client: 'Wager × BookStore',
+        color: 'linear-gradient(135deg,rgba(52,211,153,0.2) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'A live XR stadium experience deployed across 40 cities. Users could inhabit a virtual premium box seat, interact with real-time statistics, and place live bets — all inside a single spatial session.',
+        stats: [
+          { label: 'Timeline', value: '8 weeks' },
+          { label: 'Users', value: '1.2M sessions' },
+          { label: 'Result', value: '+87% engagement' },
+          { label: 'Platform', value: 'iOS / Android AR' }
+        ]
+      },
+      'BookStore Virtual Showroom': {
+        tag: 'VR Experience', client: 'BookStore Global',
+        color: 'linear-gradient(135deg,rgba(251,191,36,0.2) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'An always-on virtual flagship store where customers browse, customise, and purchase physical products inside a photorealistic VR environment. Cut returns by 43% in the first quarter.',
+        stats: [
+          { label: 'Timeline', value: '5 months' },
+          { label: 'Regions', value: '18 countries' },
+          { label: 'Result', value: '-43% returns' },
+          { label: 'Platform', value: 'Quest / Vision Pro' }
+        ]
+      },
+      'Mercury Mission Control HUD': {
+        tag: 'Spatial UI', client: 'Mercury Industries',
+        color: 'linear-gradient(135deg,rgba(239,68,68,0.2) 0%,rgba(0,0,0,0.7) 100%)',
+        desc: 'A mission-critical AR HUD for aerospace operators. Layered spatial telemetry, predictive alerts, and multi-channel comms — all rendered in under 7ms to meet strict aviation latency standards.',
+        stats: [
+          { label: 'Timeline', value: '9 months' },
+          { label: 'Latency', value: '<7ms certified' },
+          { label: 'Result', value: '0 critical misses' },
+          { label: 'Standard', value: 'DO-178C compliant' }
+        ]
+      }
+    };
+
+    /* ── Modal open/close logic ── */
+    var overlay  = document.getElementById('project-modal-overlay');
+    var closeBtn = document.getElementById('modal-close-btn');
+
+    function openModal(title) {
+      var data = projectData[title];
+      if (!data) return;
+
+      document.getElementById('modal-tag').textContent   = data.tag;
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-client').textContent = data.client;
+      document.getElementById('modal-desc').textContent  = data.desc;
+      document.getElementById('modal-hero').style.background = data.color;
+
+      var statsEl = document.getElementById('modal-stats');
+      statsEl.innerHTML = data.stats.map(function (s) {
+        return '<div class="modal-stat-cell">' +
+          '<div class="modal-stat-label">' + s.label + '</div>' +
+          '<div class="modal-stat-value">' + s.value + '</div>' +
+          '</div>';
+      }).join('');
+
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ── Wire up cards ── */
+    document.querySelectorAll('.work-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var titleEl = card.querySelector('.work-card-title');
+        if (titleEl) openModal(titleEl.textContent.trim());
+      });
+    });
+  </script>
+
+  <!-- GDPR Cookie Banner -->
+  <div id="cookie-banner" role="alertdialog" aria-label="Cookie consent">
+    <p class="cookie-text">
+      <strong>We use cookies.</strong> Zenrixa uses essential cookies to keep things working and analytics cookies to improve your experience. We comply with GDPR as a Malta-based company.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">Accept All</button>
+      <button class="cookie-btn-decline" id="cookie-decline">Essential Only</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── GDPR Cookie Banner ── */
+    (function () {
+      if (localStorage.getItem('zenrixa_cookie_consent')) return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      setTimeout(function () { banner.classList.add('is-visible'); }, 1800);
+      function dismiss(choice) {
+        localStorage.setItem('zenrixa_cookie_consent', choice);
+        banner.style.transform = 'translateX(-50%) translateY(120px)';
+        banner.style.opacity = '0';
+        setTimeout(function () { banner.remove(); }, 500);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookie-decline').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
+
+</body>
+</html>

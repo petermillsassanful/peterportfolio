@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Zenrixa | Next-Gen VR Creative Agency</title>
+  <meta name="description" content="Meet the team behind Zenrixa — a next-generation VR creative agency building immersive experiences and spatial computing products for the future.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['"DM Sans"', 'Inter', 'sans-serif'] } } }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-split { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    @media(max-width:768px){ .about-split { grid-template-columns:1fr; gap:40px; } }
+    .about-stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.07); border-radius:20px; overflow:hidden; }
+    .about-stat-cell { background:#050505; padding:32px 28px; display:flex; flex-direction:column; gap:6px; }
+    .about-stat-num { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; letter-spacing:-0.04em; color:#fff; font-style:italic; line-height:1; }
+    .about-stat-label { font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+    .team-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:24px; overflow:hidden; transition:border-color .25s ease,transform .25s ease; }
+    .team-card:hover { border-color:rgba(255,255,255,0.18); transform:translateY(-4px); }
+    .team-card-placeholder { width:100%; height:260px; background:linear-gradient(135deg,rgba(255,111,0,0.12) 0%,rgba(255,255,255,0.04) 100%); display:flex; align-items:center; justify-content:center; font-size:3rem; font-weight:800; color:rgba(255,255,255,0.15); letter-spacing:-0.04em; }
+    .team-card-body { padding:20px 22px 24px; }
+    .team-card-name { font-size:17px; font-weight:700; letter-spacing:-0.02em; color:#fff; margin-bottom:4px; }
+    .team-card-role { font-size:12px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,111,0,0.8); margin-bottom:12px; }
+    .team-card-bio { font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65; }
+    .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+    .value-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:20px; padding:28px 24px; transition:border-color .25s,background .25s; }
+    .value-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(255,111,0,0.25); }
+    .value-icon { width:44px; height:44px; border-radius:12px; background:rgba(255,111,0,0.1); border:1px solid rgba(255,111,0,0.18); display:flex; align-items:center; justify-content:center; color:#ff8c2a; margin-bottom:16px; }
+    .value-title { font-size:16px; font-weight:700; letter-spacing:-0.02em; color:#fff; margin-bottom:8px; }
+    .value-desc { font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65; }
+    .timeline { display:flex; flex-direction:column; gap:0; position:relative; }
+    .timeline::before { content:''; position:absolute; left:20px; top:8px; bottom:8px; width:1px; background:rgba(255,255,255,0.1); }
+    .timeline-item { display:flex; gap:32px; padding-bottom:40px; position:relative; }
+    .timeline-dot { flex-shrink:0; width:41px; display:flex; justify-content:center; padding-top:4px; }
+    .timeline-dot-inner { width:9px; height:9px; border-radius:50%; background:#ff6f00; border:2px solid rgba(255,111,0,0.3); outline:4px solid rgba(255,111,0,0.08); flex-shrink:0; }
+    .timeline-year { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,111,0,0.8); margin-bottom:6px; }
+    .timeline-title { font-size:16px; font-weight:700; letter-spacing:-0.02em; color:#fff; margin-bottom:6px; }
+    .timeline-desc { font-size:13px; color:rgba(255,255,255,0.45); line-height:1.65; }
+    @media(max-width:768px){ .journey-grid { grid-template-columns:1fr !important; gap:40px !important; } }
+  </style>
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="About — Zenrixa">
+  <meta property="og:description" content="Meet the multidisciplinary team building the next generation of VR experiences and spatial computing products.">
+  <meta property="og:image"       content="images/pricing-headset.jpg">
+  <meta property="og:url"         content="https://zenrixa.com/about.html">
+  <meta property="og:site_name"   content="Zenrixa">
+</head>
+<body class="bg-black text-white" style="font-family:'DM Sans',Inter,sans-serif;">
+
+  <nav class="inner-nav">
+    <a href="index.html" class="inner-nav-logo">
+      <div class="inner-nav-logo-icon"><div></div></div>
+      <span>Zenrixa</span>
+    </a>
+    <ul class="inner-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="inner-nav-cta">Get in Touch</a>
+  </nav>
+
+  <div class="page-content">
+
+    <div class="page-hero">
+      <div class="page-eyebrow"><span class="page-eyebrow-dot"></span>Our Story</div>
+      <h1 class="page-hero-heading">Built for the<br><em style="font-style:italic;font-weight:300;">Frontier</em></h1>
+      <p class="page-hero-sub">Zenrixa was founded with one conviction: the next decade of human experience will be spatial. We build the tools, interfaces, and environments that make that future real.</p>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="page-section">
+      <div class="about-split reveal">
+        <div>
+          <div class="page-eyebrow" style="margin-bottom:16px;"><span class="page-eyebrow-dot"></span>Who We Are</div>
+          <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:20px;">A team obsessed with spatial computing</h2>
+          <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:20px;">We are designers, engineers, and strategists who left traditional agencies because we believed there was a better way to build immersive experiences. Zenrixa is the result of that belief.</p>
+          <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.8;">From ultra-low-latency VR interfaces to spatial brand identities, we work at the intersection of hardware, software, and human psychology to deliver experiences that genuinely move people.</p>
+        </div>
+        <div class="about-stat-grid">
+          <div class="about-stat-cell"><div class="about-stat-num"><span data-count="380" data-suffix="+" data-duration="1800">380</span><span style="font-size:.5em;font-weight:300;font-style:normal;">+</span></div><div class="about-stat-label">Projects Delivered</div></div>
+          <div class="about-stat-cell"><div class="about-stat-num"><span data-count="200" data-suffix="+" data-duration="1600">200</span><span style="font-size:.5em;font-weight:300;font-style:normal;">+</span></div><div class="about-stat-label">XR Campaigns</div></div>
+          <div class="about-stat-cell"><div class="about-stat-num"><span data-count="3000" data-suffix="k+" data-scale="1000" data-duration="2000">3k</span><span style="font-size:.5em;font-weight:300;font-style:normal;">+</span></div><div class="about-stat-label">Happy Customers</div></div>
+          <div class="about-stat-cell"><div class="about-stat-num" style="font-size:2rem;">$<span data-count="43" data-suffix="k" data-duration="1400">43k</span></div><div class="about-stat-label">Avg. Client Revenue Lift</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="page-section">
+      <div class="page-eyebrow reveal" style="margin-bottom:40px;"><span class="page-eyebrow-dot"></span>Our Journey</div>
+      <div class="journey-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+        <div>
+          <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:40px;">How we got<br>here</h2>
+          <p class="reveal reveal-delay-1" style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.8;">From a small studio in Malta to a global XR agency trusted by brands across four continents — this is the Zenrixa story.</p>
+        </div>
+        <div class="timeline reveal reveal-delay-2">
+          <div class="timeline-item">
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div><div class="timeline-year">2019</div><div class="timeline-title">Founded in Valletta</div><div class="timeline-desc">Started as a 3-person VR prototyping studio with a shared belief in spatial computing.</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div><div class="timeline-year">2021</div><div class="timeline-title">First 100 Projects</div><div class="timeline-desc">Crossed 100 delivered VR experiences and launched our proprietary spatial design toolkit.</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div><div class="timeline-year">2023</div><div class="timeline-title">Google Premier Partner</div><div class="timeline-desc">Recognized as a Lead Google Partner — validating our approach to immersive marketing.</div></div>
+          </div>
+          <div class="timeline-item" style="padding-bottom:0;">
+            <div class="timeline-dot"><div class="timeline-dot-inner" style="background:#fff;border-color:rgba(255,255,255,0.3);outline-color:rgba(255,255,255,0.08);"></div></div>
+            <div><div class="timeline-year" style="color:rgba(255,255,255,0.5);">2026 – Now</div><div class="timeline-title">Zenrixa Vision Launch</div><div class="timeline-desc">Launched the Zenrixa Vision headset platform — bringing the full stack in-house.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="page-section">
+      <div class="page-eyebrow reveal" style="margin-bottom:12px;"><span class="page-eyebrow-dot"></span>The Team</div>
+      <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:16px;">Minds behind the vision</h2>
+      <p class="reveal reveal-delay-1" style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.8;max-width:520px;margin-bottom:48px;">A multidisciplinary crew of spatial designers, engineers, and strategists united by one mission.</p>
+      <div class="team-grid">
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-placeholder">AK</div>
+          <div class="team-card-body"><div class="team-card-name">Alex Korda</div><div class="team-card-role">Founder & CEO</div><div class="team-card-bio">Former spatial computing lead at Meta Reality Labs. Believes VR is the next great communication medium.</div></div>
+        </div>
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-card-placeholder">SM</div>
+          <div class="team-card-body"><div class="team-card-name">Sara Mela</div><div class="team-card-role">Chief Design Officer</div><div class="team-card-bio">Award-winning XR designer with 12 years building immersive environments for top global brands.</div></div>
+        </div>
+        <div class="team-card reveal reveal-delay-3">
+          <div class="team-card-placeholder">JN</div>
+          <div class="team-card-body"><div class="team-card-name">James Nkosi</div><div class="team-card-role">CTO & Co-Founder</div><div class="team-card-bio">Pioneered ultra-low-latency rendering pipelines. Holds 3 patents in spatial computing architecture.</div></div>
+        </div>
+        <div class="team-card reveal reveal-delay-4">
+          <div class="team-card-placeholder">LP</div>
+          <div class="team-card-body"><div class="team-card-name">Lena Park</div><div class="team-card-role">Head of Strategy</div><div class="team-card-bio">Brand strategist who transforms immersive experiences into measurable business outcomes.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <div class="page-section">
+      <div class="page-eyebrow reveal" style="margin-bottom:12px;"><span class="page-eyebrow-dot"></span>Our Values</div>
+      <h2 class="reveal" style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:48px;">What drives us</h2>
+      <div class="values-grid">
+        <div class="value-card reveal reveal-delay-1"><div class="value-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="value-title">Spatial-first Thinking</div><div class="value-desc">Every decision starts with the question: how does this feel in three dimensions?</div></div>
+        <div class="value-card reveal reveal-delay-2"><div class="value-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="value-title">Ultra-low Latency</div><div class="value-desc">We obsess over milliseconds because human perception deserves nothing less than perfection.</div></div>
+        <div class="value-card reveal reveal-delay-3"><div class="value-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="value-title">Partnership</div><div class="value-desc">We don't take projects. We build long-term relationships with brands we genuinely believe in.</div></div>
+        <div class="value-card reveal reveal-delay-4"><div class="value-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="value-title">Precision at Scale</div><div class="value-desc">Beautiful craft doesn't have to break under pressure. We engineer for millions of users from day one.</div></div>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <h2 class="reveal">Ready to build something<br><em style="font-style:italic;font-weight:300;">extraordinary?</em></h2>
+      <p class="reveal reveal-delay-1">Let's talk about how Zenrixa can transform your vision into an immersive reality.</p>
+      <div class="cta-strip-btns reveal reveal-delay-2">
+        <a href="contact.html" class="btn-primary">Start a Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+        <a href="work.html" class="btn-outline">View Our Work</a>
+      </div>
+    </div>
+
+    <footer class="inner-footer">
+      <div class="inner-footer-top">
+        <a href="index.html" class="inner-footer-brand">
+          <div class="inner-nav-logo-icon" style="width:22px;height:22px;"><div style="width:8px;height:8px;"></div></div>
+          <span>Zenrixa</span>
+        </a>
+        <div class="inner-footer-links">
+          <a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="product.html">Product</a><a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="inner-footer-bottom">
+        <p>©2026 ZENRIXA LIMITED. ALL RIGHTS RESERVED.</p>
+        <p>VALLETTA, MALTA</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+
+  <script>
+    /* ── Counting Animation ── */
+    (function(){
+      function easeOutExpo(t){ return t===1?1:1-Math.pow(2,-10*t); }
+      function fmt(v,scale,suffix){
+        if(scale){
+          /* scale: e.g. scale=1000, suffix="k+" → show "3k+" */
+          var scaled=Math.round(v/scale);
+          return scaled+suffix;
+        }
+        return (v>=1000?Math.round(v).toLocaleString():Math.round(v))+suffix;
+      }
+      function animateCount(el,target,prefix,suffix,duration,scale){
+        var start=performance.now();
+        function step(now){
+          var p=Math.min((now-start)/duration,1),v=easeOutExpo(p)*target;
+          el.textContent=prefix+fmt(v,scale,suffix);
+          if(p<1){requestAnimationFrame(step);}
+          else{el.textContent=prefix+fmt(target,scale,suffix);}
+        }
+        requestAnimationFrame(step);
+      }
+      var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting)return;
+          obs.unobserve(e.target);
+          var el=e.target,
+              count=parseFloat((el.dataset.count||'').replace(/[^\d.]/g,'')),
+              prefix=el.dataset.prefix||'',
+              suffix=el.dataset.suffix||'',
+              scale=el.dataset.scale?parseInt(el.dataset.scale,10):0,
+              dur=parseInt(el.dataset.duration||'1800',10);
+          if(!isNaN(count))animateCount(el,count,prefix,suffix,dur,scale);
+        });
+      },{threshold:0.3});
+      document.querySelectorAll('[data-count]').forEach(function(el){obs.observe(el);});
+    })();
+  </script>
+  <script src="nav.js" defer></script>
+  <script src="site.js" defer></script>
+
+  <!-- GDPR Cookie Banner -->
+  <div id="cookie-banner" role="alertdialog" aria-label="Cookie consent">
+    <p class="cookie-text">
+      <strong>We use cookies.</strong> Zenrixa uses essential cookies to keep things working and analytics cookies to improve your experience. We comply with GDPR as a Malta-based company.
+      <a href="contact.html">Privacy Policy</a>
+    </p>
+    <div class="cookie-btns">
+      <button class="cookie-btn-accept" id="cookie-accept">Accept All</button>
+      <button class="cookie-btn-decline" id="cookie-decline">Essential Only</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── GDPR Cookie Banner ── */
+    (function () {
+      if (localStorage.getItem('zenrixa_cookie_consent')) return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      setTimeout(function () { banner.classList.add('is-visible'); }, 1800);
+      function dismiss(choice) {
+        localStorage.setItem('zenrixa_cookie_consent', choice);
+        banner.style.transform = 'translateX(-50%) translateY(120px)';
+        banner.style.opacity = '0';
+        setTimeout(function () { banner.remove(); }, 500);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookie-decline').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
+
+</body>
+</html>
