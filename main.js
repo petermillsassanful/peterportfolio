@@ -26,7 +26,8 @@
   const ready2  = new Uint8Array(TOTAL_FRAMES_2);
 
   /* ─── Lerp Factor ───────────────────────────────────────── */
-  const LERP_FACTOR = 0.15;
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const LERP_FACTOR = isTouchDevice ? 0.22 : 0.16;
   let targetProgress1 = 0, currentProgress1 = 0;
   let targetProgress2 = 0, currentProgress2 = 0;
 
@@ -95,21 +96,28 @@
     scheduleRender();
   }
 
-  /* ─── High-DPI Canvas Sizing ────────────────────────────── */
+  /* ─── High-DPI Canvas Sizing & Layout Cache ────────────── */
 
   let canvasWidth  = 0;
   let canvasHeight = 0;
   let dpr = 1;
+  let scrollable1 = 1;
+  let scrollable3 = 1;
 
   function resizeCanvases() {
-    dpr          = window.devicePixelRatio || 1;
+    /* Cap DPR to 2 for battery, memory, and butter-smooth mobile 60/120fps */
+    dpr          = Math.min(window.devicePixelRatio || 1, 2);
     canvasWidth  = window.innerWidth;
     canvasHeight = window.innerHeight;
 
+    /* Pre-cache scrollable distances to prevent layout thrashing inside scroll listener */
+    scrollable1  = Math.max(1, section1.offsetHeight - canvasHeight);
+    scrollable3  = Math.max(1, section3.offsetHeight - canvasHeight);
+
     [{ canvas: canvas1, ctx: ctx1 },
      { canvas: canvas2, ctx: ctx2 }].forEach((item) => {
-      item.canvas.width  = canvasWidth  * dpr;
-      item.canvas.height = canvasHeight * dpr;
+      item.canvas.width  = Math.round(canvasWidth  * dpr);
+      item.canvas.height = Math.round(canvasHeight * dpr);
       item.ctx.setTransform(1, 0, 0, 1, 0, 0);
       item.ctx.scale(dpr, dpr);
       item.ctx.imageSmoothingEnabled = true;
@@ -119,6 +127,7 @@
     cachedWatermarkGrad = null;
     lastFrame1 = -1;
     lastFrame2 = -1;
+    updateTargetProgress();
     scheduleRender();
   }
 
@@ -185,17 +194,15 @@
     return lastIdx;
   }
 
-  /* ─── Scroll Progress ───────────────────────────────────── */
+  /* ─── Scroll Progress (High-Performance) ────────────────── */
 
   function updateTargetProgress() {
-    const rect1       = section1.getBoundingClientRect();
-    const scrollable1 = section1.offsetHeight - window.innerHeight;
+    const rect1 = section1.getBoundingClientRect();
     if (scrollable1 > 0) {
       targetProgress1 = Math.max(0, Math.min(1, -rect1.top / scrollable1));
     }
 
-    const rect3       = section3.getBoundingClientRect();
-    const scrollable3 = section3.offsetHeight - window.innerHeight;
+    const rect3 = section3.getBoundingClientRect();
     if (scrollable3 > 0) {
       targetProgress2 = Math.max(0, Math.min(1, -rect3.top / scrollable3));
     }
@@ -279,11 +286,11 @@
   const chatInput    = document.getElementById('chat-input');
   const chatSend     = document.getElementById('chat-send');
 
-  const BOT_RESPONSES = [
-    "Thanks for reaching out! Our team is currently exploring the metaverse, but please leave your email and we'll get back to you shortly. 🚀",
-    "Great question! We'd love to discuss this further — drop us your email and a Zenrixa specialist will follow up within 24 hours.",
-    "We appreciate you connecting with us! Our agents are a bit busy rendering the future right now. Leave your email and we'll be in touch!",
-    "Noted! We'll have someone from our team reach out soon. In the meantime, explore our Headset section below — it might answer your question. 👇",
+  const STUDIO_RESPONSES = [
+    "Thanks for reaching out! One of our design partners here in Valletta will review this and reply directly today.",
+    "Great question. We engineer spatial interfaces and real-time 3D pipelines from scratch. Drop your email and we'll send our latest case studies and technical breakdown.",
+    "We'd love to collaborate on this. If you share your project timeline or rough scope, Alex or Sara from our founding team will reply within a couple of hours.",
+    "Got your note! Whether you're exploring the Zenrixa Vision headset platform or commissioning custom XR work, leave your email and we'll follow up directly.",
   ];
 
   function openModal() {
@@ -313,7 +320,7 @@
 
   function showTypingIndicator() {
     const indicator = document.createElement('div');
-    indicator.className = 'chat-bubble chat-bubble--bot chat-typing';
+    indicator.className = 'chat-bubble chat-bubble--studio chat-typing';
     indicator.id = 'chat-typing-indicator';
     indicator.innerHTML = '<span></span><span></span><span></span>';
     chatThread.appendChild(indicator);
@@ -336,11 +343,11 @@
       showTypingIndicator();
       setTimeout(() => {
         removeTypingIndicator();
-        const reply = BOT_RESPONSES[Math.floor(Math.random() * BOT_RESPONSES.length)];
-        appendBubble(reply, 'bot');
+        const reply = STUDIO_RESPONSES[Math.floor(Math.random() * STUDIO_RESPONSES.length)];
+        appendBubble(reply, 'studio');
         chatSend.disabled = false;
         chatInput.focus();
-      }, 1500);
+      }, 1200);
     }, 300);
   }
 

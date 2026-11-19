@@ -19,7 +19,6 @@
     if (!hasLoader) {
       document.body.style.opacity = '0';
       document.body.style.transition = 'opacity 0.38s ease';
-      /* Use rAF so the initial opacity:0 is painted before we remove it */
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           document.body.style.opacity = '1';
@@ -27,23 +26,51 @@
       });
     }
 
+    /* Restore opacity if page is restored from bfcache (Back/Forward button) */
+    window.addEventListener('pageshow', function () {
+      document.body.style.transition = 'opacity 0.25s ease';
+      document.body.style.opacity = '1';
+    });
+
     /* Intercept internal link clicks and fade out first */
     document.addEventListener('click', function (e) {
       const link = e.target.closest('a[href]');
       if (!link) return;
 
-      const href = link.getAttribute('href');
+      const rawHref = link.getAttribute('href');
+      if (!rawHref) return;
 
-      /* Skip: anchors, external, mailto, tel, _blank */
-      if (!href) return;
-      if (href.startsWith('#'))        return;
-      if (href.startsWith('http'))     return;
-      if (href.startsWith('mailto'))   return;
-      if (href.startsWith('tel'))      return;
-      if (link.target === '_blank')    return;
-
-      /* Skip if modifier keys held (open in new tab gesture) */
+      /* Skip: protocols, mailto, tel, _blank */
+      if (rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return;
+      if (link.target === '_blank') return;
       if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+
+      /* Resolve full target URL against current location */
+      let targetUrl;
+      try {
+        targetUrl = new URL(link.href, window.location.href);
+      } catch (err) {
+        return;
+      }
+
+      /* Skip external origins */
+      if (targetUrl.origin !== window.location.origin) return;
+
+      /* Handle in-page anchor jumps or clicking same-page links without reloading */
+      if (targetUrl.pathname === window.location.pathname) {
+        if (targetUrl.hash) {
+          const targetEl = document.querySelector(targetUrl.hash);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+            return;
+          }
+        } else if (rawHref === '#' || rawHref === window.location.pathname.split('/').pop()) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+      }
 
       e.preventDefault();
 
@@ -51,7 +78,7 @@
       document.body.style.opacity    = '0';
 
       setTimeout(function () {
-        window.location.href = href;
+        window.location.href = link.href;
       }, 220);
     });
   })();

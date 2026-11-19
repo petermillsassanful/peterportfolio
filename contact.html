@@ -25,11 +25,12 @@
     .contact-badge-dot { width:8px; height:8px; border-radius:50%; background:#34d399; animation:pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
     .contact-form { background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:40px; }
+    @media(max-width:640px){ .contact-form { padding:24px 18px; border-radius:18px; } }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
     @media(max-width:600px){ .form-row { grid-template-columns:1fr; } }
     .form-group { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
     .form-label { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
-    .form-input, .form-textarea, .form-select { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:13px 16px; font-size:14px; color:#fff; font-family:'DM Sans',Inter,sans-serif; outline:none; transition:border-color .2s,background .2s; }
+    .form-input, .form-textarea, .form-select { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; font-size:16px; color:#fff; font-family:'DM Sans',Inter,sans-serif; outline:none; transition:border-color .2s,background .2s; }
     .form-input::placeholder, .form-textarea::placeholder { color:rgba(255,255,255,0.2); }
     .form-input:focus, .form-textarea:focus, .form-select:focus { border-color:rgba(255,111,0,0.5); background:rgba(255,255,255,0.06); }
     .form-select { appearance:none; cursor:pointer; }
@@ -243,7 +244,7 @@
       </div>
       <div class="inner-footer-bottom">
         <p>©2026 ZENRIXA LIMITED. ALL RIGHTS RESERVED.</p>
-        <p>VALLETTA, MALTA</p>
+        <p>BUILT BY BOLASKITECH</p>
       </div>
     </footer>
 

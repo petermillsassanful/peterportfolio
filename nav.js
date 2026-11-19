@@ -45,7 +45,7 @@
         <a href="contact.html" class="nav-overlay-cta">Get in Touch</a>
         <div class="nav-overlay-footer">
           <span>©2026 Zenrixa Limited</span>
-          <span>Valletta, Malta</span>
+          <span>Built by bolaskitech</span>
         </div>
       </div>
     `;

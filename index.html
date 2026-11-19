@@ -7,7 +7,7 @@
 
   <!-- SEO Meta -->
   <meta name="description" content="Zenrixa is a next-generation VR creative agency building immersive experiences, hyper-focused interfaces, and ultra-low-latency spatial computing products for the future.">
-  <meta name="keywords" content="VR, virtual reality, spatial computing, immersive design, creative agency, Zenrixa, metaverse">
+  <meta name="keywords" content="VR, virtual reality, spatial computing, immersive design, creative agency, Zenrixa, WebXR, spatial interface">
   <meta name="author" content="Zenrixa">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -74,19 +74,19 @@
     </div>
 
     <!-- Foreground Transparent Zenrixa Layout -->
-    <div class="relative z-10 -mt-[100vh] w-full min-h-screen flex flex-col justify-between p-6 sm:p-10 md:p-14 pointer-events-auto">
+    <div class="relative z-10 -mt-[100vh] w-full min-h-screen flex flex-col justify-between pt-24 pb-8 sm:pb-12 px-6 sm:px-10 md:px-14 pointer-events-auto">
       
-      <!-- Top Navigation Header -->
-      <header class="w-full flex items-center justify-between">
+      <!-- Top Navigation Header (Fixed Floating Glass Nav) -->
+      <header id="site-header" class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 sm:px-10 md:px-14 py-4 md:py-5 transition-all duration-300">
         <!-- Logo -->
-        <div class="flex items-center gap-3">
-          <div class="w-7 h-7 rotate-45 bg-white text-black flex items-center justify-center font-bold rounded-sm shadow-md">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-7 h-7 rotate-45 bg-white text-black flex items-center justify-center font-bold rounded-sm shadow-md transition-transform group-hover:rotate-90 duration-300">
             <div class="w-3 h-3 bg-black"></div>
           </div>
           <span class="text-xl font-bold tracking-tight text-white font-sans drop-shadow-md">
             Zenrixa
           </span>
-        </div>
+        </a>
 
         <!-- Center Nav Items -->
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
@@ -94,34 +94,38 @@
           <a href="product.html" class="hover:text-white transition-colors">Product</a>
           <a href="about.html" class="hover:text-white transition-colors">About</a>
           <a href="work.html" class="hover:text-white transition-colors">Work</a>
-          <a href="work.html" class="hover:text-white transition-colors">Portfolio</a>
           <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
         </nav>
 
-        <!-- Menu Button Pill -->
-        <button id="btn-open-menu" class="px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all duration-200 active:scale-95 shadow-xl">
-          MENU
-        </button>
+        <!-- Right Side: Contact pill on desktop, Menu Button on mobile -->
+        <div class="flex items-center gap-3">
+          <a href="contact.html" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all duration-200 active:scale-95 shadow-xl">
+            <span>Get in Touch</span>
+          </a>
+          <button id="btn-open-menu" class="md:hidden flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md transition-all duration-200 active:scale-95 shadow-xl" aria-label="Open menu">
+            <span>MENU</span>
+          </button>
+        </div>
       </header>
 
       <!-- Main Hero Content -->
-      <main class="w-full flex-1 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <main class="w-full flex-1 py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <!-- Left Side: Headline & CTAs -->
-        <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+        <div class="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-6">
           <div class="flex items-center gap-2">
             <span class="text-zinc-300 font-medium text-xs tracking-[0.2em] uppercase flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-white inline-block"></span>
-              CREATIVE AGENCY
+              <span class="w-2 h-2 rounded-full bg-amber-400 inline-block shadow-[0_0_8px_#fbbf24]"></span>
+              SPATIAL COMPUTING STUDIO
             </span>
           </div>
 
-          <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-[-0.03em] text-white leading-[1.04] font-sans drop-shadow-2xl max-w-2xl">
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-[-0.03em] text-white leading-[1.05] font-sans drop-shadow-2xl max-w-2xl">
             The Future Is<br>Closer Than You Think
           </h1>
 
-          <div class="flex items-center gap-3 pt-2">
-            <div class="flex items-center gap-1 text-amber-400">
+          <div class="flex items-center gap-3 pt-1">
+            <div class="flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
               <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -129,39 +133,51 @@
               <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
             <span class="text-xs font-semibold uppercase text-zinc-300 tracking-wider">
-              3000+ CUSTOMERS
+              380+ VERIFIED PROJECTS
             </span>
           </div>
 
-          <div class="flex items-center gap-4 pt-4">
+          <div class="flex items-center gap-3 sm:gap-4 pt-2 sm:pt-4 flex-wrap">
             <button id="btn-open-chat" class="group flex items-center gap-3 pl-6 pr-2 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 transition-all duration-200 active:scale-95 shadow-2xl">
-              <span>Chat With Us</span>
+              <span>Talk With Our Team</span>
               <div class="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/></svg>
               </div>
             </button>
 
-            <a href="work.html" id="btn-our-works" class="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white font-bold text-sm border border-zinc-800 hover:bg-zinc-900 transition-all active:scale-95 shadow-2xl">
-              <span>Our Works</span>
+            <a href="work.html" id="btn-our-works" class="flex items-center gap-2 px-6 py-3 rounded-full bg-black/60 text-white font-bold text-sm border border-zinc-700/80 hover:bg-zinc-900 transition-all active:scale-95 shadow-2xl backdrop-blur-sm">
+              <span>Our Work</span>
               <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
             </a>
           </div>
+
+          <!-- Mobile-only compact partner row -->
+          <div class="lg:hidden pt-3 flex items-center gap-3 text-xs text-zinc-400 flex-wrap">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-500">TRUSTED BY</span>
+            <span class="text-zinc-300 font-medium">Mercury</span>
+            <span>•</span>
+            <span class="text-zinc-300 font-medium">Crono</span>
+            <span>•</span>
+            <span class="text-zinc-300 font-medium">Zantic</span>
+            <span>•</span>
+            <span class="text-zinc-300 font-medium">BookStore</span>
+          </div>
         </div>
 
-        <!-- Right Side: Top Glass Card & Bottom Partners -->
-        <div class="lg:col-span-5 flex flex-col items-end justify-between space-y-12">
+        <!-- Right Side: Top Glass Card & Bottom Partners (Shown on desktop) -->
+        <div class="hidden lg:flex lg:col-span-5 flex-col items-end justify-between space-y-12">
           
           <!-- Top Card: Design to Explore -->
           <div class="w-full max-w-md rounded-3xl bg-black/40 border border-white/10 p-6 backdrop-blur-md space-y-4 shadow-2xl">
             <h3 class="text-2xl font-bold text-white tracking-tight">Design to explore.</h3>
             <p class="text-xs text-zinc-300 leading-relaxed">
-              Immersive typographic interfaces built for hyper-focused engagement.
+              Spatial interfaces and interactive typography crafted for real immersion.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-semibold tracking-widest text-zinc-400 uppercase">
               <span>CORE FOCUS • 01</span>
-              <button class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+              <a href="work.html" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
                 ➔
-              </button>
+              </a>
             </div>
           </div>
 
@@ -224,11 +240,13 @@
         <li><a href="product.html" class="mobile-nav-link">Product</a></li>
         <li><a href="about.html"   class="mobile-nav-link">About</a></li>
         <li><a href="work.html"    class="mobile-nav-link">Work</a></li>
-        <li><a href="work.html"    class="mobile-nav-link">Portfolio</a></li>
         <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
       </ul>
+      <a href="contact.html" class="mt-8 py-3 px-6 rounded-full bg-white text-black font-bold text-center text-sm tracking-wide uppercase hover:bg-zinc-200 transition-all">
+        Start a Project
+      </a>
       <!-- Footer tag -->
-      <p class="mobile-menu-footer">© 2026 Zenrixa</p>
+      <p class="mobile-menu-footer">© 2026 Zenrixa • Built by bolaskitech</p>
     </nav>
   </div>
 
@@ -329,8 +347,8 @@
 
       <!-- Header -->
       <div class="pricing-header">
-        <h2 class="pricing-heading">Sleek design, built for scales</h2>
-        <p class="pricing-sub">Explore our modular subscriptions. Choose standard or premium tiers, and leverage real-time render tools.</p>
+        <h2 class="pricing-heading">Transparent studio pricing</h2>
+        <p class="pricing-sub">Every tier includes access to our spatial rendering pipeline, real-time export tools, and direct support from our engineering team.</p>
       </div>
 
       <!-- Billing Toggle -->
@@ -435,10 +453,10 @@
             <p class="pricing-desc">For studios, agencies, and professional creators working with brands.</p>
             <ul class="pricing-features">
               <li><span class="pricing-check pricing-check--pro">&#10003;</span>Unlimited projects</li>
-              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Export up to 8K + animations</li>
-              <li><span class="pricing-check pricing-check--pro">&#10003;</span>AI-powered content generation tools</li>
-              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Unlimited team members</li>
-              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Brand customization (logos, fonts, palettes)</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Export up to 8K + spatial animations</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Procedural 3D scene & asset pipeline</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Unlimited team seats & sync</li>
+              <li><span class="pricing-check pricing-check--pro">&#10003;</span>Custom brand assets & typography</li>
             </ul>
           </div>
           <div class="pricing-card-cta">
@@ -467,18 +485,18 @@
       <div class="s3-panel" id="s3-panel-hero" aria-hidden="false">
         <div class="s3-panel-inner s3-panel-inner--hero">
           <!-- Eyebrow label -->
-          <span class="s3-eyebrow">// ZENRIXA SOLUTIONS</span>
+          <span class="s3-eyebrow">// STUDIO CAPABILITIES</span>
 
-          <!-- Split headline: "We offer next level solutions" -->
+          <!-- Split headline: "We engineer spatial experiences that feel effortless" -->
           <h2 class="s3-hero-heading">
-            We offer next<br>
-            level
-            <em class="s3-hero-italic">solutions</em>
+            Spatial design<br>
+            that feels
+            <em class="s3-hero-italic">effortless</em>
           </h2>
 
           <!-- Narrative description (right column on desktop) -->
           <p class="s3-hero-desc">
-            After working with us, your business will achieve new heights. We return with in-depth analysis, tailored spatial strategies, and problems solved. We transform your vision into immersive reality.
+            From initial prototypes to global spatial rollouts, we partner with visionary teams to design ultra-low-latency interfaces, interactive 3D showrooms, and memorable branded environments.
           </p>
         </div>
       </div>
@@ -487,7 +505,7 @@
       <div class="s3-panel" id="s3-panel-metrics" aria-hidden="true">
         <div class="s3-panel-inner s3-panel-inner--metrics">
           <p class="s3-metrics-statement">
-            AT ZENRIXA, HELPING BUSINESSES TACKLE CHALLENGES IS CRUCIAL. WORKING WITH US PROVIDES LONG-TERM GROWTH
+            REAL MEASUREMENT OVER SPECULATION. WE BUILD SYSTEMS GROUNDED IN USER ENGAGEMENT, 90+ FPS PERFORMANCE, AND DIRECT BUSINESS IMPACT
           </p>
 
           <div class="s3-metrics-grid">
@@ -496,8 +514,8 @@
               <div class="s3-metric-number">
                 <span class="s3-metric-sym">$</span><span data-count="43" data-suffix="k" data-duration="1600">43k</span>
               </div>
-              <div class="s3-metric-label">AVERAGE REVENUE</div>
-              <p class="s3-metric-desc">Identifying bottlenecks and executing tailor-fit strategies for scalable business growth.</p>
+              <div class="s3-metric-label">AVERAGE REVENUE EXPANSION</div>
+              <p class="s3-metric-desc">Verified client revenue growth within 90 days of launching interactive spatial campaigns.</p>
             </div>
             <!-- Metric 2 -->
             <div class="s3-metric">
@@ -505,15 +523,15 @@
                 <span data-count="200" data-suffix="+" data-duration="1800">200+</span>
               </div>
               <div class="s3-metric-label">XR CAMPAIGNS</div>
-              <p class="s3-metric-desc">Delivering high-impact spatial campaigns across global markets with measurable performance.</p>
+              <p class="s3-metric-desc">High-fidelity spatial activations shipped across global consumer and enterprise markets.</p>
             </div>
             <!-- Metric 3 -->
             <div class="s3-metric">
               <div class="s3-metric-number">
                 <span data-count="380" data-suffix="+" data-duration="2000">380+</span>
               </div>
-              <div class="s3-metric-label">SUCCESSFUL PROJECTS</div>
-              <p class="s3-metric-desc">Comprehensive execution from initial concept to long-term market dominance.</p>
+              <div class="s3-metric-label">DELIVERED PROJECTS</div>
+              <p class="s3-metric-desc">Custom spatial interfaces, hardware HUDs, and web-based 3D applications engineered to date.</p>
             </div>
           </div>
         </div>
@@ -522,7 +540,7 @@
       <!-- ─── CHAPTER 3: Challenge Cards ──────────────────────── -->
       <div class="s3-panel" id="s3-panel-cards" aria-hidden="true">
         <div class="s3-panel-inner s3-panel-inner--cards">
-          <span class="s3-eyebrow">// AGENCY PARADIGM MATRIX</span>
+          <span class="s3-eyebrow">// COMMON BOTTLENECKS WE SOLVE</span>
 
           <div class="s3-cards-grid">
 
@@ -536,7 +554,7 @@
               </div>
               <div class="s3-card-body">
                 <span class="s3-card-quote">&ldquo;</span>
-                <p>We have difficulties in attracting and converting potential customers.</p>
+                <p>We struggle to explain complex products using flat 2D landing pages.</p>
               </div>
             </div>
 
@@ -550,7 +568,7 @@
               </div>
               <div class="s3-card-body">
                 <span class="s3-card-quote">&ldquo;</span>
-                <p>Our sales and ROI could use a serious boost — I need campaigns that actually deliver results.</p>
+                <p>Our sales conversions have plateaued — we need an experience that truly wows clients.</p>
               </div>
             </div>
 
@@ -564,7 +582,7 @@
               </div>
               <div class="s3-card-body">
                 <span class="s3-card-quote">&ldquo;</span>
-                <p>Our goal is to stand out among others — we need to regain influence on the market.</p>
+                <p>We want to lead in spatial computing before our competitors catch up.</p>
               </div>
             </div>
 
@@ -578,18 +596,18 @@
               </div>
               <div class="s3-card-body">
                 <span class="s3-card-quote">&ldquo;</span>
-                <p>Managing our content workflow and creating consistent output feels like an endless struggle.</p>
+                <p>Optimizing 3D assets to run smoothly on mobile and headsets without frame drops is painful.</p>
               </div>
             </div>
 
             <!-- Card 5: Recommended (spans 2 cols) -->
             <div class="s3-card s3-card--recommended">
               <div class="s3-card-top">
-                <span class="s3-card-badge">RECOMMENDED METHOD</span>
+                <span class="s3-card-badge">HOW WE SOLVE IT</span>
                 <div class="s3-card-dot"><div></div></div>
               </div>
               <div class="s3-card-body">
-                <p>We create tailored XR strategies including immersive environment design, spatial UX research, and ongoing performance analytics, ensuring long-term visibility and business growth.</p>
+                <p>We build custom asset optimization pipelines, responsive spatial UI, and native real-time shaders that maintain 90+ FPS across headsets and browsers — completely handled by our team from kickoff to launch.</p>
               </div>
             </div>
 
@@ -614,44 +632,45 @@
     ></video>
 
     <!-- Main Graphic Text ("Out of time and space") -->
-    <div class="relative z-10 w-full max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between pointer-events-none gap-4">
-      <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap" style="font-weight: 500; letter-spacing: -0.04em;">
+    <div class="relative z-10 w-full max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between pointer-events-none gap-2 sm:gap-4">
+      <h2 class="text-4xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap text-center md:text-left" style="font-weight: 500; letter-spacing: -0.04em;">
         Out of time
       </h2>
-      <h2 class="text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap" style="font-weight: 500; letter-spacing: -0.04em;">
+      <h2 class="text-4xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium tracking-tight text-white whitespace-nowrap text-center md:text-right" style="font-weight: 500; letter-spacing: -0.04em;">
         and space
       </h2>
     </div>
 
     <!-- Center Floating Subtitle -->
-    <div class="absolute inset-x-0 bottom-[22%] flex flex-col items-center justify-center text-center z-10 pointer-events-auto">
+    <div class="absolute inset-x-0 bottom-[28%] md:bottom-[22%] flex flex-col items-center justify-center text-center z-10 pointer-events-auto px-4">
       <p class="text-[13px] md:text-[15px] text-neutral-300 font-normal tracking-wide">
         Zenrixa is redefining the future of spatial computing.
       </p>
       <a href="about.html" class="text-[13px] md:text-[15px] text-white font-medium underline underline-offset-[5px] decoration-[1.5px] decoration-white/70 mt-2 hover:text-neutral-300 hover:decoration-white/40 transition-colors">
-        Learn more about our story
+        Learn more about our studio & story
       </a>
     </div>
 
-    <!-- Bottom Left Button -->
-    <a href="about.html" class="absolute bottom-8 left-6 md:bottom-12 md:left-12 flex items-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all z-10 group">
-      <div class="w-4 h-4 rounded-full border border-[#f95d13] flex items-center justify-center">
-        <span class="text-[#f95d13] text-[9px] font-bold leading-none select-none">i</span>
-      </div>
-      <span class="text-neutral-300 group-hover:text-white transition-colors">Our Story</span>
-    </a>
+    <!-- Bottom Buttons (Responsive Grid/Flex Container) -->
+    <div class="absolute bottom-6 md:bottom-12 inset-x-0 px-6 md:px-12 flex flex-col sm:flex-row items-center justify-between gap-3 z-10 pointer-events-auto">
+      <a href="about.html" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all group">
+        <div class="w-4 h-4 rounded-full border border-[#f95d13] flex items-center justify-center">
+          <span class="text-[#f95d13] text-[9px] font-bold leading-none select-none">i</span>
+        </div>
+        <span class="text-neutral-300 group-hover:text-white transition-colors">Our Story</span>
+      </a>
 
-    <!-- Bottom Right Button -->
-    <a href="work.html" class="absolute bottom-8 right-6 md:bottom-12 md:right-12 flex items-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all z-10 group">
-      <span class="text-neutral-300 group-hover:text-white transition-colors">View Our Work</span>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 transition-all">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+      <a href="work.html" class="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[#111111]/80 border border-white/10 backdrop-blur-md text-white text-[13px] font-medium hover:bg-[#222222]/90 hover:border-white/20 transition-all group">
+        <span class="text-neutral-300 group-hover:text-white transition-colors">View Our Work</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 transition-all">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
   </section>
 
   <!-- Video Footer -->
-  <footer id="main-footer" class="w-full min-h-screen relative overflow-hidden bg-black z-10 border-t border-white/5 flex flex-col justify-between pt-20 pb-8 px-6 md:px-12 lg:px-20" style="font-family: 'DM Sans', sans-serif;">
+  <footer id="main-footer" class="w-full min-h-screen relative overflow-hidden bg-black z-10 border-t border-white/5 flex flex-col justify-between pt-16 md:pt-20 pb-8 px-6 md:px-12 lg:px-20" style="font-family: 'DM Sans', sans-serif;">
     <!-- Video Background -->
     <video
       id="footer-video"
@@ -669,13 +688,14 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
 
     <!-- Top Section: 3 Columns -->
-    <div class="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 mt-4">
+    <div class="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mt-4 text-center md:text-left">
       
       <!-- Left Column: Links -->
-      <div class="flex flex-col justify-between h-full space-y-12">
-        <nav class="flex flex-col space-y-4">
+      <div class="flex flex-col items-center md:items-start justify-between space-y-8 md:space-y-12">
+        <nav class="flex flex-col space-y-3 md:space-y-4">
           <a href="index.html" class="text-neutral-400 hover:text-white font-medium text-base transition-colors">Home</a>
           <a href="about.html" class="text-white font-semibold text-lg hover:text-neutral-300 transition-colors tracking-wide">About us</a>
+          <a href="work.html" class="text-white font-semibold text-lg hover:text-neutral-300 transition-colors tracking-wide">Our Work</a>
           <a href="contact.html" class="text-white font-semibold text-lg hover:text-neutral-300 transition-colors tracking-wide">Partnership</a>
         </nav>
         <p class="text-neutral-500 text-[11px] leading-relaxed tracking-wide">
@@ -686,9 +706,9 @@
       <!-- Center Column: Address & Social -->
       <div class="flex flex-col items-center text-center space-y-6">
         <div>
-          <h4 class="text-neutral-500 text-[11px] font-bold tracking-[0.15em] mb-2">ADDRESS:</h4>
+          <h4 class="text-neutral-500 text-[11px] font-bold tracking-[0.15em] mb-2">STUDIO LOCATION:</h4>
           <p class="text-neutral-300 text-[13px] max-w-[260px] leading-relaxed tracking-wide">
-            Zenrixa Limited 115B, suite 3, Old Mint<br>
+            Zenrixa Limited 115B, Suite 3, Old Mint<br>
             Street, Valletta, VLT 1515, Malta
           </p>
         </div>
@@ -706,12 +726,12 @@
       </div>
 
       <!-- Right Column: Partner Badge -->
-      <div class="flex flex-col justify-between items-end h-full space-y-12 text-right">
+      <div class="flex flex-col items-center md:items-end justify-between space-y-6 md:space-y-12 text-center md:text-right">
         <p class="text-neutral-500 text-[11px] tracking-wide">
           Lead Google Partner in<br>2023
         </p>
 
-        <!-- Mock Google Partner Badge -->
+        <!-- Google Partner Badge -->
         <div class="bg-[#111111]/90 border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center w-[140px] shadow-2xl backdrop-blur-md">
           <svg class="w-[22px] h-[22px] mb-2" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -724,41 +744,41 @@
         </div>
 
         <p class="text-neutral-500 text-[11px] tracking-wide">
-          Website by hx6n
+          Built by bolaskitech
         </p>
       </div>
 
     </div>
 
     <!-- Bottom Section: Giant Typography -->
-    <div class="relative z-10 w-full flex items-center justify-center mt-24 md:mt-auto pt-10">
-      <h2 class="text-white tracking-tighter leading-none select-none flex items-baseline" style="font-size: clamp(4.5rem, 16vw, 18rem);">
+    <div class="relative z-10 w-full flex items-center justify-center mt-16 md:mt-auto pt-8">
+      <h2 class="text-white tracking-tighter leading-none select-none flex items-baseline justify-center w-full" style="font-size: clamp(3.2rem, 15vw, 18rem);">
         <span class="font-bold">ZEN</span><span class="font-light">rixa</span>
       </h2>
     </div>
   </footer>
 
-  <!-- Interactive Chat Modal -->
+  <!-- Interactive Chat Modal (Studio Team) -->
   <div id="chat-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="w-full max-w-lg rounded-3xl bg-zinc-900 border border-zinc-800 p-6 shadow-2xl flex flex-col space-y-4">
+    <div class="w-full max-w-lg rounded-3xl bg-zinc-900 border border-zinc-800 p-5 sm:p-6 shadow-2xl flex flex-col space-y-4 max-h-[85vh]">
 
       <!-- Header -->
       <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs">ZX</div>
+          <div class="w-9 h-9 rounded-full bg-amber-400 text-black flex items-center justify-center font-bold text-xs shadow-md">ZX</div>
           <div>
-            <h3 class="font-bold text-white text-base">Zenrixa Support</h3>
-            <p class="text-xs text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online now</p>
+            <h3 class="font-bold text-white text-sm sm:text-base">Zenrixa Studio Team</h3>
+            <p class="text-xs text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live from Valletta • Avg reply &lt; 1h</p>
           </div>
         </div>
-        <button id="btn-close-chat" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">✕</button>
+        <button id="btn-close-chat" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white transition-colors" aria-label="Close chat">✕</button>
       </div>
 
       <!-- Message Thread -->
-      <div id="chat-thread" class="flex flex-col gap-3 max-h-64 overflow-y-auto py-1 pr-1">
-        <!-- Initial bot message -->
-        <div class="chat-bubble chat-bubble--bot">
-          Hello! How can we help bring your product vision to life? 👋
+      <div id="chat-thread" class="flex flex-col gap-3 max-h-60 overflow-y-auto py-1 pr-1">
+        <!-- Initial studio message -->
+        <div class="chat-bubble chat-bubble--studio is-visible">
+          Hey there! Alex and the studio team here in Valletta. What kind of spatial experience or project are you looking to build? 👋
         </div>
       </div>
 
@@ -783,6 +803,7 @@
     (function () {
       const dots  = document.querySelectorAll('.testi-dot');
       const cards = document.querySelectorAll('.testi-card');
+      const track = document.getElementById('testi-track');
       if (!dots.length || !cards.length) return;
 
       let active = 0;
@@ -794,14 +815,15 @@
         active = (index + cards.length) % cards.length;
         dots[active].classList.add('testi-dot--active');
         cards[active].classList.add('is-active');
-        /* On mobile, scroll the active card into view */
-        if (window.innerWidth <= 768) {
-          cards[active].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        /* On mobile, scroll track horizontally without moving window scroll */
+        if (track && window.innerWidth <= 768) {
+          const cardOffset = cards[active].offsetLeft - track.offsetLeft;
+          track.scrollTo({ left: cardOffset, behavior: 'smooth' });
         }
       }
 
       function startAuto() {
-        timer = setInterval(function () { goTo(active + 1); }, 5000);
+        timer = setInterval(function () { goTo(active + 1); }, 6000);
       }
 
       function stopAuto() { clearInterval(timer); }
@@ -812,16 +834,18 @@
       dots.forEach(function (dot) {
         dot.addEventListener('click', function () {
           stopAuto();
-          goTo(parseInt(dot.dataset.index));
+          goTo(parseInt(dot.dataset.index, 10));
           startAuto();
         });
       });
 
-      /* Pause on hover */
+      /* Pause on touch or hover */
       var section = document.getElementById('section-testimonials');
       if (section) {
         section.addEventListener('mouseenter', stopAuto);
         section.addEventListener('mouseleave', startAuto);
+        section.addEventListener('touchstart', stopAuto, { passive: true });
+        section.addEventListener('touchend', startAuto, { passive: true });
       }
 
       startAuto();
@@ -859,34 +883,19 @@
   </script>
 
   <script>
-    /* ── Scroll Spy (index.html only) ── */
+    /* ── Header Glass Blur on Scroll ── */
     (function () {
-      var sections = [
-        { id: 'section-1',            label: 'Home' },
-        { id: 'section-plain-black',  label: 'Pricing' },
-        { id: 'section-testimonials', label: 'Stories' },
-        { id: 'section-3',            label: 'Results' },
-        { id: 'section-4',            label: 'Contact' },
-      ];
-      var navLinks = document.querySelectorAll('.nav-links a, .nav-link');
-      if (!navLinks.length) return;
-      var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var id = entry.target.id;
-          navLinks.forEach(function (a) { a.classList.remove('nav-link--spy-active'); });
-          navLinks.forEach(function (a) {
-            var href = a.getAttribute('href') || '';
-            if (href === '#' + id || (id === 'section-1' && href === '#')) {
-              a.classList.add('nav-link--spy-active');
-            }
-          });
-        });
-      }, { threshold: 0.35 });
-      sections.forEach(function (s) {
-        var el = document.getElementById(s.id);
-        if (el) obs.observe(el);
-      });
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      var updateHeader = function () {
+        if (window.scrollY > 30) {
+          header.classList.add('header--scrolled');
+        } else {
+          header.classList.remove('header--scrolled');
+        }
+      };
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
     })();
   </script>
 </body>
