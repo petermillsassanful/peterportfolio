@@ -44,11 +44,22 @@
       img.onload = () => {
         if ('createImageBitmap' in window) {
           createImageBitmap(img)
-            .then((bm) => { frameArr[index] = bm;  readyArr[index] = 1; resolve(); })
-            .catch(()  => { frameArr[index] = img; readyArr[index] = 1; resolve(); });
+            .then((bm) => {
+              frameArr[index] = bm;
+              readyArr[index] = 1;
+              scheduleRender();
+              resolve();
+            })
+            .catch(() => {
+              frameArr[index] = img;
+              readyArr[index] = 1;
+              scheduleRender();
+              resolve();
+            });
         } else {
           frameArr[index] = img;
           readyArr[index] = 1;
+          scheduleRender();
           resolve();
         }
       };
@@ -59,16 +70,33 @@
 
   async function loadPriorityFrames() {
     let loaded = 0;
+    const S1_PRIORITY = PRIORITY_FRAMES; // 15
+    const S2_PRIORITY = 8;               // Preload first 8 frames of the VR Headset too!
+    const TOTAL_PRIORITY = S1_PRIORITY + S2_PRIORITY;
     const promises = [];
-    for (let i = 0; i < PRIORITY_FRAMES; i++) {
+
+    // Preload Section 1 initial frames
+    for (let i = 0; i < S1_PRIORITY; i++) {
       const p = loadAndDecode(framePath('images', i), frames1, ready1, i).then(() => {
         loaded++;
-        const pct = Math.floor((loaded / PRIORITY_FRAMES) * 100);
+        const pct = Math.floor((loaded / TOTAL_PRIORITY) * 100);
         loaderText.textContent = `Loading ${pct}%`;
         loaderFill.style.width = `${pct}%`;
       });
       promises.push(p);
     }
+
+    // Preload Section 3 (the VR Headset animation) initial frames so it is NEVER blank!
+    for (let i = 0; i < S2_PRIORITY; i++) {
+      const p = loadAndDecode(framePath('images2', i), frames2, ready2, i).then(() => {
+        loaded++;
+        const pct = Math.floor((loaded / TOTAL_PRIORITY) * 100);
+        loaderText.textContent = `Loading ${pct}%`;
+        loaderFill.style.width = `${pct}%`;
+      });
+      promises.push(p);
+    }
+
     await Promise.all(promises);
   }
 
@@ -77,10 +105,10 @@
       for (let i = PRIORITY_FRAMES; i < TOTAL_FRAMES_1; i++) {
         loadAndDecode(framePath('images', i), frames1, ready1, i);
       }
-      for (let i = 0; i < TOTAL_FRAMES_2; i++) {
+      for (let i = 8; i < TOTAL_FRAMES_2; i++) {
         loadAndDecode(framePath('images2', i), frames2, ready2, i);
       }
-    }, 300);
+    }, 200);
   }
 
   async function boot() {
@@ -96,23 +124,17 @@
     scheduleRender();
   }
 
-  /* ─── High-DPI Canvas Sizing & Layout Cache ────────────── */
+  /* ─── High-DPI Canvas Sizing & Layout ─────────────────── */
 
   let canvasWidth  = 0;
   let canvasHeight = 0;
   let dpr = 1;
-  let scrollable1 = 1;
-  let scrollable3 = 1;
 
   function resizeCanvases() {
     /* Cap DPR to 2 for battery, memory, and butter-smooth mobile 60/120fps */
     dpr          = Math.min(window.devicePixelRatio || 1, 2);
     canvasWidth  = window.innerWidth;
     canvasHeight = window.innerHeight;
-
-    /* Pre-cache scrollable distances to prevent layout thrashing inside scroll listener */
-    scrollable1  = Math.max(1, section1.offsetHeight - canvasHeight);
-    scrollable3  = Math.max(1, section3.offsetHeight - canvasHeight);
 
     [{ canvas: canvas1, ctx: ctx1 },
      { canvas: canvas2, ctx: ctx2 }].forEach((item) => {
@@ -124,7 +146,6 @@
       item.ctx.imageSmoothingQuality = 'high';
     });
 
-    cachedWatermarkGrad = null;
     lastFrame1 = -1;
     lastFrame2 = -1;
     updateTargetProgress();
@@ -133,10 +154,7 @@
 
   /* ─── Rendering Engine ──────────────────────────────────── */
 
-  let cachedWatermarkGrad = null;
-
   function getWatermarkGradient(ctx) {
-    if (cachedWatermarkGrad) return cachedWatermarkGrad;
     const cx = canvasWidth  - 35;
     const cy = canvasHeight - 20;
     const r  = 110;
@@ -144,7 +162,6 @@
     g.addColorStop(0,    'rgba(0,0,0,0.9)');
     g.addColorStop(0.45, 'rgba(0,0,0,0.35)');
     g.addColorStop(1,    'rgba(0,0,0,0)');
-    cachedWatermarkGrad = g;
     return g;
   }
 
@@ -172,10 +189,14 @@
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.drawImage(frame, x, y, drawW, drawH);
 
-    const grad = getWatermarkGradient(ctx);
-    const r = 110;
-    ctx.fillStyle = grad;
-    ctx.fillRect(canvasWidth - r * 1.6, canvasHeight - r * 1.6, r * 1.6, r * 1.6);
+    try {
+      const grad = getWatermarkGradient(ctx);
+      const r = 110;
+      ctx.fillStyle = grad;
+      ctx.fillRect(canvasWidth - r * 1.6, canvasHeight - r * 1.6, r * 1.6, r * 1.6);
+    } catch (e) {
+      // Ignore watermark gradient if context restriction occurs
+    }
   }
 
   function smartDraw(ctx, frameArr, readyArr, targetIdx, lastIdx) {
@@ -184,7 +205,16 @@
       paintToCanvas(ctx, frameArr[targetIdx]);
       return targetIdx;
     }
+    // Search backwards for the nearest decoded frame
     for (let i = targetIdx - 1; i >= 0; i--) {
+      if (readyArr[i]) {
+        if (i === lastIdx) return lastIdx;
+        paintToCanvas(ctx, frameArr[i]);
+        return i;
+      }
+    }
+    // If none found backwards, search forwards so canvas is NEVER blank
+    for (let i = targetIdx + 1; i < readyArr.length; i++) {
       if (readyArr[i]) {
         if (i === lastIdx) return lastIdx;
         paintToCanvas(ctx, frameArr[i]);
@@ -194,18 +224,18 @@
     return lastIdx;
   }
 
-  /* ─── Scroll Progress (High-Performance) ────────────────── */
+  /* ─── Scroll Progress (Dynamic & Precise) ───────────────── */
 
   function updateTargetProgress() {
+    const vh = window.innerHeight;
+
     const rect1 = section1.getBoundingClientRect();
-    if (scrollable1 > 0) {
-      targetProgress1 = Math.max(0, Math.min(1, -rect1.top / scrollable1));
-    }
+    const s1 = Math.max(1, section1.offsetHeight - vh);
+    targetProgress1 = Math.max(0, Math.min(1, -rect1.top / s1));
 
     const rect3 = section3.getBoundingClientRect();
-    if (scrollable3 > 0) {
-      targetProgress2 = Math.max(0, Math.min(1, -rect3.top / scrollable3));
-    }
+    const s3 = Math.max(1, section3.offsetHeight - vh);
+    targetProgress2 = Math.max(0, Math.min(1, -rect3.top / s3));
   }
 
   /* ─── On-Demand Render Loop ──────────────────────────────── */
