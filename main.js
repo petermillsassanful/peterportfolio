@@ -1,8 +1,18 @@
 (function () {
-  /* ─── Configuration ─────────────────────────────────────── */
-  const TOTAL_FRAMES_1  = 120;
-  const TOTAL_FRAMES_2  = 200;
-  const PRIORITY_FRAMES = 15;
+  /* ─── Device & Performance Configuration ────────────────── */
+  const isMobile = (window.innerWidth < 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const DPR_CAP = isMobile ? 1.5 : 2;
+  const LERP_FACTOR = isMobile ? 0.22 : 0.16;
+
+  /* On mobile, subsample frames to stay well under the 300MB iOS WebKit memory limit.
+     Desktop uses 100% full frame fidelity (120 + 200 = 320 frames).
+     Mobile steps by 3 (40 + 66 = 106 frames) saving ~80% memory while looking silky smooth. */
+  const STEP_1 = isMobile ? 3 : 1;
+  const STEP_2 = isMobile ? 3 : 1;
+
+  const TOTAL_FRAMES_1 = 120;
+  const TOTAL_FRAMES_2 = 200;
+  const PRIORITY_FRAMES_1 = isMobile ? 6 : 15;
 
   /* ─── DOM References ────────────────────────────────────── */
   const section1 = document.getElementById('section-1');
@@ -25,24 +35,25 @@
   const frames2 = new Array(TOTAL_FRAMES_2);
   const ready2  = new Uint8Array(TOTAL_FRAMES_2);
 
-  /* ─── Lerp Factor ───────────────────────────────────────── */
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  const LERP_FACTOR = isTouchDevice ? 0.22 : 0.16;
   let targetProgress1 = 0, currentProgress1 = 0;
   let targetProgress2 = 0, currentProgress2 = 0;
 
-  /* ─── Image Loading ─────────────────────────────────────── */
+  /* ─── Image Loading & Decoding ──────────────────────────── */
 
   function framePath(folder, index) {
     const num = String(index + 1).padStart(3, '0');
     return `${folder}/ezgif-frame-${num}.webp`;
   }
 
+  /* On mobile WebKit, createImageBitmap creates non-reclaimable GPU allocations
+     that trigger iOS jetsam OOM crashes. On mobile, we use standard HTMLImageElement
+     which the browser's compositor pages in/out dynamically. On desktop, we leverage
+     createImageBitmap for zero-jank background thread decode. */
   function loadAndDecode(src, frameArr, readyArr, index) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        if ('createImageBitmap' in window) {
+        if (!isMobile && ('createImageBitmap' in window)) {
           createImageBitmap(img)
             .then((bm) => {
               frameArr[index] = bm;
@@ -68,58 +79,94 @@
     });
   }
 
+  /* Concurrently load frames in controlled batches to avoid saturating network & CPU */
+  async function loadFramesInBatches(indices, folder, frameArr, readyArr, batchSize = 6) {
+    for (let i = 0; i < indices.length; i += batchSize) {
+      const chunk = indices.slice(i, i + batchSize);
+      await Promise.all(chunk.map((idx) => loadAndDecode(framePath(folder, idx), frameArr, readyArr, idx)));
+    }
+  }
+
+  /* Initial Priority Load: Just enough frames to render Section 1 and first frame of Section 3 */
   async function loadPriorityFrames() {
     let loaded = 0;
-    const S1_PRIORITY = PRIORITY_FRAMES; // 15
-    const S2_PRIORITY = 8;               // Preload first 8 frames of the VR Headset too!
-    const TOTAL_PRIORITY = S1_PRIORITY + S2_PRIORITY;
-    const promises = [];
-
-    // Preload Section 1 initial frames
-    for (let i = 0; i < S1_PRIORITY; i++) {
-      const p = loadAndDecode(framePath('images', i), frames1, ready1, i).then(() => {
-        loaded++;
-        const pct = Math.floor((loaded / TOTAL_PRIORITY) * 100);
-        loaderText.textContent = `Loading ${pct}%`;
-        loaderFill.style.width = `${pct}%`;
-      });
-      promises.push(p);
+    const initialIndices1 = [];
+    for (let i = 0; i < PRIORITY_FRAMES_1; i += STEP_1) {
+      initialIndices1.push(i);
     }
+    // Also include index 0 for Section 3 so it's never blank
+    const totalPriorityCount = initialIndices1.length + 1;
 
-    // Preload Section 3 (the VR Headset animation) initial frames so it is NEVER blank!
-    for (let i = 0; i < S2_PRIORITY; i++) {
-      const p = loadAndDecode(framePath('images2', i), frames2, ready2, i).then(() => {
+    const promises = initialIndices1.map((idx) =>
+      loadAndDecode(framePath('images', idx), frames1, ready1, idx).then(() => {
         loaded++;
-        const pct = Math.floor((loaded / TOTAL_PRIORITY) * 100);
-        loaderText.textContent = `Loading ${pct}%`;
-        loaderFill.style.width = `${pct}%`;
-      });
-      promises.push(p);
-    }
+        const pct = Math.floor((loaded / totalPriorityCount) * 100);
+        if (loaderText) loaderText.textContent = `Loading ${pct}%`;
+        if (loaderFill) loaderFill.style.width = `${pct}%`;
+      })
+    );
+
+    promises.push(
+      loadAndDecode(framePath('images2', 0), frames2, ready2, 0).then(() => {
+        loaded++;
+        const pct = Math.floor((loaded / totalPriorityCount) * 100);
+        if (loaderText) loaderText.textContent = `Loading ${pct}%`;
+        if (loaderFill) loaderFill.style.width = `${pct}%`;
+      })
+    );
 
     await Promise.all(promises);
   }
 
-  function loadRemainingFrames() {
-    setTimeout(() => {
-      for (let i = PRIORITY_FRAMES; i < TOTAL_FRAMES_1; i++) {
-        loadAndDecode(framePath('images', i), frames1, ready1, i);
-      }
-      for (let i = 8; i < TOTAL_FRAMES_2; i++) {
-        loadAndDecode(framePath('images2', i), frames2, ready2, i);
-      }
-    }, 200);
+  /* Load remaining Section 1 frames gently in background */
+  function loadRemainingSection1() {
+    const remainingIndices = [];
+    for (let i = PRIORITY_FRAMES_1; i < TOTAL_FRAMES_1; i += STEP_1) {
+      if (!ready1[i]) remainingIndices.push(i);
+    }
+    loadFramesInBatches(remainingIndices, 'images', frames1, ready1, isMobile ? 4 : 8);
+  }
+
+  /* Section 3 Lazy Loader: Only loads when the user scrolls towards Section 3 */
+  let s3LoadStarted = false;
+  function startLoadingSection3() {
+    if (s3LoadStarted) return;
+    s3LoadStarted = true;
+
+    const s3Indices = [];
+    for (let i = 0; i < TOTAL_FRAMES_2; i += STEP_2) {
+      if (!ready2[i]) s3Indices.push(i);
+    }
+    loadFramesInBatches(s3Indices, 'images2', frames2, ready2, isMobile ? 4 : 8);
+  }
+
+  function initSection3LazyTrigger() {
+    const triggerEl = document.getElementById('section-plain-black') || document.getElementById('section-testimonials');
+    if ('IntersectionObserver' in window && triggerEl) {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          startLoadingSection3();
+          obs.disconnect();
+        }
+      }, { rootMargin: '400px 0px' });
+      obs.observe(triggerEl);
+    } else {
+      setTimeout(startLoadingSection3, 1500);
+    }
   }
 
   async function boot() {
     await loadPriorityFrames();
     onReady();
-    loadRemainingFrames();
+    loadRemainingSection1();
+    initSection3LazyTrigger();
   }
 
   function onReady() {
-    loader.classList.add('hidden-loader');
-    setTimeout(() => { loader.style.display = 'none'; }, 400);
+    if (loader) {
+      loader.classList.add('hidden-loader');
+      setTimeout(() => { loader.style.display = 'none'; }, 400);
+    }
     resizeCanvases();
     scheduleRender();
   }
@@ -131,8 +178,8 @@
   let dpr = 1;
 
   function resizeCanvases() {
-    /* Cap DPR to 2 for battery, memory, and butter-smooth mobile 60/120fps */
-    dpr          = Math.min(window.devicePixelRatio || 1, 2);
+    /* Cap DPR to 1.5 on mobile and 2 on desktop to prevent mobile GPU OOM crashes */
+    dpr          = Math.min(window.devicePixelRatio || 1, DPR_CAP);
     canvasWidth  = window.innerWidth;
     canvasHeight = window.innerHeight;
 
